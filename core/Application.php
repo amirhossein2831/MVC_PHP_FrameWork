@@ -6,6 +6,7 @@ use App\Controller\Controller;
 
 class Application
 {
+    public const ROOT = '/opt/lampp/htdocs/project/PHPFrameWork';
     private Request $request;
     private Router $router;
 
