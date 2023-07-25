@@ -15,6 +15,11 @@ class Controller
         $this->renderView('contact','main');
     }
 
+    public static function notFount()
+    {
+        include_once Application::ROOT . "/Views/notFound.php";
+    }
+
     private function renderView($view, $layout): void
     {
         $layoutContent = $this->contentOfLayout($layout);
@@ -22,7 +27,7 @@ class Controller
         echo str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    private function  contentOfView($view): false|string
+    private function contentOfView($view): false|string
     {
         ob_start();
         include_once Application::ROOT . "/Views/$view.php";
