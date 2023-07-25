@@ -8,9 +8,11 @@ class Router implements RouterMethod
 {
     protected array $routes;
     private Request $request;
+    private Response $response;
 
-    public function __construct(Request $request){
+    public function __construct(Request $request,Response $response){
         $this->request = $request;
+        $this->response = $response;
         $this->routes = [];
     }
 
@@ -30,6 +32,7 @@ class Router implements RouterMethod
         $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
         if (!$callback) {
+            $this->response->setStatusCode(404);
             echo "NOT FOUND";
             exit;
         }
