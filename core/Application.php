@@ -2,8 +2,11 @@
 
 namespace App\core;
 
+use App\Controller\Controller;
+
 class Application
 {
+    public const ROOT = '/opt/lampp/htdocs/project/PHPFrameWork';
     private Request $request;
     private Router $router;
 
@@ -30,8 +33,9 @@ class Application
 
     public function initialRouter(): void
     {
-        $this->getRouter()->get('/',fn()=>'hello world');
-        $this->getRouter()->get('/content',fn()=>'content');
+        $controller = new Controller();
+        $this->getRouter()->get('/',[$controller,'home']);
+        $this->getRouter()->get('/contact',[$controller,'contact']);
     }
 
 }
