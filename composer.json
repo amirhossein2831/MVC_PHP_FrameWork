@@ -1,0 +1,15 @@
+{
+    "name": "amirhossein/php-frame-work",
+    "description": "this is a MVC PHP FrameWork",
+    "autoload": {
+        "psr-4": {
+        }
+    },
+    "authors": [
+        {
+            "name": "Amirhossein",
+            "email": "Amirmemool12@gmail.com"
+        }
+    ],
+    "require": {}
+}
