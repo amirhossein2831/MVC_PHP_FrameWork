@@ -7,24 +7,24 @@ use App\Component\Interface\RouterMethod;
 class Router implements RouterMethod
 {
     protected array $routes;
+    private Request $request;
 
-    public function __construct(){
+    public function __construct(Request $request){
+        $this->request = $request;
         $this->routes = [];
     }
 
     public function get($path,$callback): void
     {
-        $this->routes ['get'][$path] = $callback;
+        $this->routes ['GET'][$path] = $callback;
     }
 
     public function post($path, $callback): void
     {
-        $this->routes ['post'][$path] = $callback;
+        $this->routes ['POST'][$path] = $callback;
     }
 
     public function resolve()
     {
-        $path = $_SERVER["REQUEST_URI"];
-        $path = substr($path, 0, strpos($path, "?") ?: strlen($path));
     }
 }
