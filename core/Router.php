@@ -33,9 +33,9 @@ class Router implements RouterMethod
         $callback = $this->routes[$method][$path] ?? false;
         if (!$callback) {
             $this->response->setStatusCode(404);
-            echo "NOT FOUND";
+            call_user_func(['App\Controller\Controller','notFount']);
             exit;
         }
-        echo call_user_func($callback);
+        call_user_func($callback);
     }
 }
