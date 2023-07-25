@@ -12,7 +12,7 @@ class Application
         $this->router = new Router($this->request);
     }
 
-    public function run()
+    public function run(): void
     {
         $this->router->resolve();
     }
