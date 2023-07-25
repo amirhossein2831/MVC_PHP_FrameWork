@@ -3,6 +3,7 @@
     "description": "this is a MVC PHP FrameWork",
     "autoload": {
         "psr-4": {
+            "App\\" : "./"
         }
     },
     "authors": [
