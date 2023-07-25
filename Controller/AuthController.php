@@ -4,16 +4,23 @@ namespace App\Controller;
 
 use App\Component\Interface\Authentication;
 use App\core\BaseController;
+use App\core\Request;
 
 class AuthController extends BaseController implements Authentication
 {
-    public function login()
+    public function login(Request $request)
     {
-        $this->renderView('login','main');
+        if ($request->isPost()) {
+            echo "should work with post";
+        }
+        $this->renderView('login', 'main');
     }
 
-    public function register()
+    public function register(Request $request)
     {
-        $this->renderView('register','main');
+        if ($request->isPost()) {
+            echo "should work with post";
+        }
+        $this->renderView('register', 'main');
     }
 }
