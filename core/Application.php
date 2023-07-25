@@ -30,6 +30,8 @@ class Application
 
     public function initialRouter(): void
     {
+        $this->getRouter()->get('/',fn()=>'hello world');
+        $this->getRouter()->get('/content',fn()=>'content');
     }
 
 }
