@@ -2,6 +2,8 @@
 
 namespace App\core;
 
+use App\Controller\Controller;
+
 class Application
 {
     private Request $request;
@@ -30,8 +32,9 @@ class Application
 
     public function initialRouter(): void
     {
-        $this->getRouter()->get('/',fn()=>'hello world');
-        $this->getRouter()->get('/content',fn()=>'content');
+        $controller = new Controller();
+        $this->getRouter()->get('/',[$controller,'home']);
+        $this->getRouter()->get('/contact',[$controller,'contact']);
     }
 
 }
