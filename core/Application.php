@@ -10,6 +10,7 @@ class Application
     public function __construct(){
         $this->request = new Request();
         $this->router = new Router($this->request);
+        $this->initialRouter();
     }
 
     public function run(): void
@@ -25,6 +26,10 @@ class Application
     public final function getRequest(): Request
     {
         return $this->request;
+    }
+
+    public function initialRouter(): void
+    {
     }
 
 }
