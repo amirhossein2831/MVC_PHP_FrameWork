@@ -1,18 +1,25 @@
 <?php
 namespace App\Controller;
+use App\core\Application;
+
 class Controller
 {
 
     public function home()
     {
-        echo "home";
+        $this->renderView("Home");
 
     }
 
     public function contact()
     {
-        echo "contact";
+            $this->renderView("Contact");
 
+    }
+
+    public function renderView($view)
+    {
+        include_once Application::ROOT . "/Views/$view.php";
     }
 
 }
