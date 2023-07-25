@@ -3,6 +3,7 @@
 namespace App\core;
 
 use App\Component\Interface\RouterMethod;
+use App\Controller\Controller;
 
 class Router implements RouterMethod
 {
@@ -33,7 +34,7 @@ class Router implements RouterMethod
         $callback = $this->routes[$method][$path] ?? false;
         if (!$callback) {
             $this->response->setStatusCode(404);
-            call_user_func(['App\Controller\Controller','notFount']);
+            call_user_func([Controller::class,'notFount']);
             exit;
         }
         call_user_func($callback);

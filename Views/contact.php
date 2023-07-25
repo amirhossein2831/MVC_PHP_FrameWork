@@ -1,5 +1,5 @@
 <h1>contact</h1>
-<form>
+<form action="" method="post">
 
     <div class="mb-3">
         <label for="subjectInput" class="form-label">Subject</label>
@@ -9,8 +9,8 @@
 
     <div class="mb-3">
         <label for="descriptionTextArea" class="form-label">Description</label>
-        <textarea style="resize: none" name="description" class="form-control" id="descriptionTextArea"></textarea>
-        <div id="emailHelp" class="form-text">Enter the Description for your Contact.</div>
+        <textarea style="resize: none" name="description" class="form-control" ></textarea>
+        <div id="descriptionHelp" class="form-text">Enter the Description for your Contact.</div>
     </div>
 
     <div class="mb-3">
