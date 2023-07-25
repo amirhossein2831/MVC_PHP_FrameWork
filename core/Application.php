@@ -2,7 +2,7 @@
 
 namespace App\core;
 
-use App\Controller\Controller;
+use App\Controller\SiteController;
 
 class Application
 {
@@ -35,9 +35,11 @@ class Application
 
     public function initialRouter(): void
     {
-        $controller = new Controller();
+        $controller = new SiteController();
         $this->getRouter()->get('/',[$controller,'home']);
+        $this->getRouter()->get('/home',[$controller,'home']);
         $this->getRouter()->get('/contact',[$controller,'contact']);
+        $this->getRouter()->post('/contact',[$controller,'handleContact']);
     }
 
     public final function getResponse(){

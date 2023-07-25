@@ -3,9 +3,8 @@ namespace App\Controller;
 use App\core\Application;
 use App\core\Request;
 
-class Controller
+class SiteController
 {
-
     public function home()
     {
         $this->renderView( 'home',  'main');            //if you want to pass value to view pass it to render view then pass it to contentofView
