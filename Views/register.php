@@ -39,6 +39,13 @@
         <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
     </div>
+    <div class="row">
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col">
+            <a href="/" class="btn btn-primary">Go Back to Home</a>
+        </div>
+    </div>
 </form><?php
