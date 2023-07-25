@@ -10,23 +10,35 @@ class Request
         return substr($path, 0, strpos($path, "?") ?: strlen($path));
     }
 
-    public function method(): string
-    {
-        return $_SERVER["REQUEST_METHOD"];
-    }
     public function getBody()
     {
         $body = [];
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            foreach ($_GET as $key => $velue) {
+            foreach ($_GET as $key => $value) {
                 $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            foreach ($_POST as $key => $velue) {
+            foreach ($_POST as $key => $value) {
                 $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
         return $body;
     }
+
+    public function method(): string
+    {
+        return $_SERVER["REQUEST_METHOD"];
+    }
+
+    public function isPost()
+    {
+        return $this->method() === 'POST';
+    }
+
+    public function isGet()
+    {
+        return $this->method() === 'GET';
+    }
+
 }
