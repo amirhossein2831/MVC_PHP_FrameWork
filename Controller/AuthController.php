@@ -13,7 +13,7 @@ class AuthController extends BaseController implements Authentication
         if ($request->isPost()) {
             echo "should work with post";
         }
-        $this->renderView('login', 'main');
+        $this->renderView('login', 'auth');
     }
 
     public function register(Request $request)
@@ -21,6 +21,6 @@ class AuthController extends BaseController implements Authentication
         if ($request->isPost()) {
             echo "should work with post";
         }
-        $this->renderView('register', 'main');
+        $this->renderView('register', 'auth');
     }
 }
