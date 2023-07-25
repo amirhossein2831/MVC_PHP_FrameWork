@@ -10,11 +10,10 @@ class Request
         return substr($path, 0, strpos($path, "?") ?: strlen($path));
     }
 
-    public function getMethod(): string
+    public function method(): string
     {
         return $_SERVER["REQUEST_METHOD"];
     }
-
     public function getBody()
     {
         $body = [];

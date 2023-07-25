@@ -30,7 +30,7 @@ class Router implements RouterMethod
     public function resolve()
     {
         $path = $this->request->getPath();
-        $method = $this->request->getMethod();
+        $method = $this->request->method();
         $callback = $this->routes[$method][$path] ?? false;
         if (!$callback) {
             $this->response->setStatusCode(404);
