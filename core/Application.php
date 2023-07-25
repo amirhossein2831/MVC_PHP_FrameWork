@@ -2,6 +2,7 @@
 
 namespace App\core;
 
+use App\Controller\AuthController;
 use App\Controller\SiteController;
 
 class Application
@@ -23,27 +24,22 @@ class Application
         $this->router->resolve();
     }
 
+    public function initialRouter(): void
+    {
+        $siteController = new SiteController();
+        $authController = new AuthController();
+        $this->getRouter()->get('/',[$siteController,'home']);
+        $this->getRouter()->get('/home',[$siteController,'home']);
+        $this->getRouter()->get('/contact',[$siteController,'contact']);
+        $this->getRouter()->post('/contact',[$siteController,'handleContact']);
+
+        $this->getRouter()->get('/login',[$authController,'login']);
+        $this->getRouter()->post('/login',[$authController,'login']);
+        $this->getRouter()->get('/register',[$authController,'register']);
+        $this->getRouter()->post('/register',[$authController,'register']);
+    }
     public final function getRouter(): Router
     {
         return $this->router;
     }
-
-    public final function getRequest(): Request
-    {
-        return $this->request;
-    }
-
-    public function initialRouter(): void
-    {
-        $controller = new SiteController();
-        $this->getRouter()->get('/',[$controller,'home']);
-        $this->getRouter()->get('/home',[$controller,'home']);
-        $this->getRouter()->get('/contact',[$controller,'contact']);
-        $this->getRouter()->post('/contact',[$controller,'handleContact']);
-    }
-
-    public final function getResponse(){
-        return $this->response;
-    }
-
 }
