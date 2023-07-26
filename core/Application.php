@@ -44,4 +44,9 @@ class Application
     {
         return $this->router;
     }
+
+    public function getDataBase(): DataBase
+    {
+        return $this->dataBase;
+    }
 }
