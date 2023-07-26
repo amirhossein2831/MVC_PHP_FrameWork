@@ -13,6 +13,9 @@ abstract class BaseController
 
     private function contentOfView($view,$param = []): false|string
     {
+        foreach ($param as $key => $value) {
+            $$key = $value;
+        }
         ob_start();
         include_once Application::$ROOT . "/Views/$view.php";
         return ob_get_clean();
