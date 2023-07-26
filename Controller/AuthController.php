@@ -26,7 +26,6 @@ class AuthController extends BaseController implements Authentication
             if ($registerModel->validate() && $registerModel->register()) {
                 return 'success';
             }
-
         }
         $this->renderView('register', 'auth', [
             'model' => $registerModel
