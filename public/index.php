@@ -15,6 +15,7 @@ $config = [
 ];
 $app = new Application($config);
 
+$app->initialRouter();
 
 $app->run();
 

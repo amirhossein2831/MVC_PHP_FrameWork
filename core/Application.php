@@ -18,7 +18,6 @@ class Application
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request,$this->response);
-        $this->initialRouter();
         $this->dataBase = new DataBase($config['db']);
     }
 
