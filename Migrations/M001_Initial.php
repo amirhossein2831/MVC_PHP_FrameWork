@@ -10,6 +10,6 @@ class M001_Initial
 
     public function down()
     {
-        echo "donw migration";
+        echo "down migration";
     }
 }
