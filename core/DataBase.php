@@ -2,7 +2,10 @@
 
 namespace App\core;
 
+use App\Migrations\M001_Initial;
 use PDO;
+use ReflectionClass;
+use ReflectionException;
 
 class DataBase
 {
@@ -20,12 +23,22 @@ class DataBase
     public function applyMigration()
     {
         $this->createMigrationTable();
-        $this->getAppliedMigration();
+        $appliedMigration = $this->getAppliedMigration();
+        $files = scandir(Application::$ROOT . '/Migrations');
+        $toApplyMigration = array_diff($files, ['.','..',...$appliedMigration]);
+        
+        foreach ($toApplyMigration as $migration) {
+            $class = 'App\Migrations\class';
+            $migrationClass = pathinfo($migration, PATHINFO_FILENAME);
+            $class =  str_replace('class', $migrationClass,$class);
+            $instance = new $class();
+            $instance->up();
+        }
     }
 
-    public function createMigrationTable()
+    public function createMigrationTable(): void
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXITST migrations(
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations(
                                     id INT AUTO_INCREMENT PRIMARY KEY,
                                     migration VARCHAR(255),
                                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
