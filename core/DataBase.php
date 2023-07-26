@@ -28,5 +28,10 @@ class DataBase
                                     ENGINE=INNODB;");
     }
 
-  
+    private function getAppliedMigration()
+    {
+        $statement = $this->pdo->prepare("SELECT migration FROM migrations");
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_COLUMN);
+    }
 }
