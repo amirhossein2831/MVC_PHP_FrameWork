@@ -2,7 +2,17 @@
 
 namespace App\core;
 
-class BaseModel
+abstract class BaseModel
 {
+
+    public function loadDate()
+    {
+
+    }
+
+    public function validate()
+    {
+
+    }
 
 }
