@@ -17,7 +17,11 @@ class DataBase
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-
+    public function applyMigration()
+    {
+        $this->createMigrationTable();
+        $this->getAppliedMigration();
+    }
 
     public function createMigrationTable()
     {
@@ -28,7 +32,7 @@ class DataBase
                                     ENGINE=INNODB;");
     }
 
-    private function getAppliedMigration()
+    private function getAppliedMigration(): false|array
     {
         $statement = $this->pdo->prepare("SELECT migration FROM migrations");
         $statement->execute();
