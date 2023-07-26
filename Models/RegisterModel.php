@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Models;
-class RegisterModel
+use App\core\BaseModel;
+
+class RegisterModel extends BaseModel
 {
     private string $firstName;
     private string $lastName;
@@ -10,6 +12,10 @@ class RegisterModel
     private string $email;
 
 
+    public function register()
+    {
+
+    }
 
     public function getFirstName(): string
     {
@@ -38,6 +44,5 @@ class RegisterModel
     {
         return $this->email;
     }
-
 
 }
