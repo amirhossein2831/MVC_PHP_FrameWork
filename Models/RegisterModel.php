@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\core\BaseModel;
+use App\Rule\RegisterRule;
 
 class RegisterModel extends BaseModel
 {
@@ -14,6 +15,10 @@ class RegisterModel extends BaseModel
 
     public function register()
     {
+    }
+    public function rules(): array
+    {
+        return RegisterRule::rules();
     }
 
     public function getFirstName(): string
