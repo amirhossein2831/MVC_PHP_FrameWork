@@ -5,16 +5,15 @@ use App\core\BaseModel;
 
 class RegisterModel extends BaseModel
 {
-    private string $firstName;
-    private string $lastName;
-    private string $password;
-    private string $confirmPassword;
-    private string $email;
+    protected string $firstName;
+    protected string $lastName;
+    protected string $password;
+    protected string $confirmPassword;
+    protected string $email;
 
 
     public function register()
     {
-
     }
 
     public function getFirstName(): string

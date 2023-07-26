@@ -21,12 +21,12 @@ class AuthController extends BaseController implements Authentication
     {
         $registerModel = new RegisterModel();
         if ($request->isPost()) {
-            $registerModel->loadDate();
+            $registerModel->loadDate($request->getBody());
 
             if ($registerModel->validate() && $registerModel->register()) {
                 return 'success';
             }
-            
+
         }
         $this->renderView('register', 'auth', [
             'model' => $registerModel
