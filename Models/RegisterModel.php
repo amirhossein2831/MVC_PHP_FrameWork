@@ -37,11 +37,12 @@ class RegisterModel extends BaseModel
                 }
             }
         }
-        return empty($this->error);
+        return $this->hasError();
     }
 
     public function register()
     {
+        //TODO: save the date in DB
     }
     public function rules(): array
     {

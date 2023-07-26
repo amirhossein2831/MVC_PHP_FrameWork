@@ -29,5 +29,9 @@ abstract class BaseModel
         }
         $this->error[$attribute][] = $message;
     }
-    
+
+    public function hasError(): bool
+    {
+        return !empty($this->error);
+    }
 }
