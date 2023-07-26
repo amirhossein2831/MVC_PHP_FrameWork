@@ -11,6 +11,7 @@ class Application
     private Request $request;
     private Response $response;
     private Router $router;
+    private DataBase $dataBase;
 
     public function __construct(){
         self::$ROOT = dirname(__DIR__);
