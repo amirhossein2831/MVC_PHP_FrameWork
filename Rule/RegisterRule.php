@@ -10,7 +10,7 @@ class RegisterRule extends Rules
     public const EMAIL = 'email';
     public const MIN_LENGTH = 'min';
     public const MAX_LENGTH = 'max';
-    public const MATH_FIELD = 'match';
+    public const MATCH_FIELD = 'match';
 
     public static function rules(): array
     {
@@ -19,7 +19,7 @@ class RegisterRule extends Rules
             'lastName' => [self::REQUIRED_FIELD],
             'email' => [self::REQUIRED_FIELD, self::EMAIL],
             'password' => [self::REQUIRED_FIELD, [self::MIN_LENGTH, 'min' => 8], [self::MAX_LENGTH, 'max' => 24]],
-            'confirmPassword' => [self::REQUIRED_FIELD, [self::MATH_FIELD, 'match' => 'password']]
+            'confirmPassword' => [self::REQUIRED_FIELD, [self::MATCH_FIELD, 'match' => 'password']]
         ];
     }
 
@@ -30,7 +30,7 @@ class RegisterRule extends Rules
             self::EMAIL => 'This field must be a valid email address',
             self::MIN_LENGTH => 'The length of this field must be more than {min}',
             self::MAX_LENGTH => 'The length of this field must be less than {max}',
-            self::MATH_FIELD => 'This field must be match with {match}',
+            self::MATCH_FIELD => 'This field must be match with {match}',
         ];
     }
 

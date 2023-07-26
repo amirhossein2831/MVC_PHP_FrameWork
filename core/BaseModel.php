@@ -30,7 +30,7 @@ abstract class BaseModel
         $this->error[$attribute][] = $message;
     }
 
-    public function hasError($attribute = null): bool
+    public function hasError($attribute = null): mixed
     {
         if (is_null($attribute)) {
             return !empty($this->error);
