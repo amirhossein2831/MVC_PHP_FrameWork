@@ -7,12 +7,13 @@ use App\Controller\SiteController;
 
 class Application
 {
-    public const ROOT = '/opt/lampp/htdocs/project/PHPFrameWork';
+    public static string $ROOT;
     private Request $request;
     private Response $response;
     private Router $router;
 
     public function __construct(){
+        self::$ROOT = dirname(__DIR__);
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request,$this->response);

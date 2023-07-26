@@ -4,24 +4,24 @@ namespace App\core;
 
 abstract class BaseController
 {
-    protected function renderView($view, $layout): void
+    protected function renderView($view, $layout,$param = []): void
     {
         $layoutContent = $this->contentOfLayout($layout);
-        $viewContent = $this->contentOfView($view);
+        $viewContent = $this->contentOfView($view,$param);
         echo str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    private function contentOfView($view): false|string
+    private function contentOfView($view,$param = []): false|string
     {
         ob_start();
-        include_once Application::ROOT . "/Views/$view.php";
+        include_once Application::$ROOT . "/Views/$view.php";
         return ob_get_clean();
     }
 
     private function contentOfLayout($layout): false|string
     {
         ob_start();
-        include_once Application::ROOT . "/Views/layout/$layout.php";
+        include_once Application::$ROOT . "/Views/layout/$layout.php";
         return ob_get_clean();
     }
 

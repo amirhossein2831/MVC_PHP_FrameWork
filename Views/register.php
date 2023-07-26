@@ -48,4 +48,4 @@
             <a href="/" class="btn btn-primary">Go Back to Home</a>
         </div>
     </div>
-</form><?php
+</form>

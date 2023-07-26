@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Component\Interface\Authentication;
 use App\core\BaseController;
 use App\core\Request;
+use App\Models\RegisterModel;
 
 class AuthController extends BaseController implements Authentication
 {
@@ -18,9 +19,16 @@ class AuthController extends BaseController implements Authentication
 
     public function register(Request $request)
     {
+        $registerModel = new RegisterModel();
         if ($request->isPost()) {
-            echo "should work with post";
+            $registerModel->loadDate($request->getBody());
+
+            if ($registerModel->validate() && $registerModel->register()) {
+                return 'success';
+            }
         }
-        $this->renderView('register', 'auth');
+        $this->renderView('register', 'auth', [
+            'model' => $registerModel
+        ]);
     }
 }
