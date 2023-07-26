@@ -14,14 +14,14 @@ abstract class BaseController
     private function contentOfView($view): false|string
     {
         ob_start();
-        include_once Application::ROOT . "/Views/$view.php";
+        include_once Application::$ROOT . "/Views/$view.php";
         return ob_get_clean();
     }
 
     private function contentOfLayout($layout): false|string
     {
         ob_start();
-        include_once Application::ROOT . "/Views/layout/$layout.php";
+        include_once Application::$ROOT . "/Views/layout/$layout.php";
         return ob_get_clean();
     }
 

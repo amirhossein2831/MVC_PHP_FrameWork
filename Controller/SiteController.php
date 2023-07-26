@@ -23,7 +23,7 @@ class SiteController extends BaseController
 
     public static function notFount()
     {
-        include_once Application::ROOT . "/Views/notFound.php";
+        include_once Application::$ROOT . "/Views/notFound.php";
     }
 
 }
