@@ -30,8 +30,17 @@ abstract class BaseModel
         $this->error[$attribute][] = $message;
     }
 
-    public function hasError(): bool
+    public function hasError($attribute = null): bool
     {
-        return !empty($this->error);
+        if (is_null($attribute)) {
+            return !empty($this->error);
+        }
+        return $this->error[$attribute] ?? false;
     }
+
+    public function getError($attribute)
+    {
+        return $this->error[$attribute][0];
+    }
+
 }
