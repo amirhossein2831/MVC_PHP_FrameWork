@@ -19,10 +19,10 @@ class Field
     public const RANGE_FIELD = 'range';
     public const COLOR_FIELD = 'color';
 
-    public RegisterModel $model;
-    public string $attribute;
+    private RegisterModel $model;
+    private string $attribute;
 
-    public string $type;
+    private string $type;
 
     public function __construct(RegisterModel $model, string $attribute,$type)
     {
