@@ -13,12 +13,13 @@ class Application
     private Router $router;
     private DataBase $dataBase;
 
-    public function __construct(){
+    public function __construct(array $config){
         self::$ROOT = dirname(__DIR__);
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request,$this->response);
         $this->initialRouter();
+        $this->dataBase = new DataBase($config['db']);
     }
 
     public function run(): void
