@@ -53,13 +53,12 @@ class UserModel extends DBModel
                 if ($ruleName === RegisterRule::UNIQUE_EMAIL) {
                     $className = $rule['class'];
                     $tableName = $className::DBName();
-                    $uniqueAttribute = $rule['attribute'] ?? $attribute;
-                    $statement = Application::$app->getDataBase()->getPdo()->prepare("SELECT * FROM $tableName WHERE $uniqueAttribute= :value");
-                    $statement->bindValue(':value', $value);
+                    $statement = Application::$app->getDataBase()->getPdo()->prepare("SELECT * FROM $tableName WHERE $attribute = :value");
+                    $statement->bindValue(':value', $this->$attribute);
                     $statement->execute();
                     $records = $statement->fetch(PDO::FETCH_ASSOC);
                     if (!empty($records)) {
-                        $this->addError($attribute, RegisterRule::UNIQUE_EMAIL);
+                        $this->addError($attribute, RegisterRule::UNIQUE_EMAIL,['attribute' => $attribute]);
                     }
                 }
             }
