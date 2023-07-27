@@ -17,9 +17,9 @@ class Form
         return new Form();
     }
 
-    public function field(RegisterModel $model, $attribute, $type): Field
+    public function field(RegisterModel $model, $attribute, $type, $iconType): Field
     {
-        return new Field($model, $attribute, $type);
+        return new Field($model, $attribute, $type, $iconType);
     }
 
     public static function end(): void
