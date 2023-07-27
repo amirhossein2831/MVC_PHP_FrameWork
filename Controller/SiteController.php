@@ -8,12 +8,12 @@ class SiteController extends BaseController
 {
     public function home()
     {
-        $this->renderView( 'home',  'main');            //if you want to pass value to view pass it to render view then pass it to contentofView
+        $this->renderView( 'home',  'newLayout');            //if you want to pass value to view pass it to render view then pass it to contentofView
     }
 
     public function contact()
     {
-        $this->renderView('contact','main');
+        $this->renderView('contact','newLayout');
     }
 
     public function handleContact(Request $request)
