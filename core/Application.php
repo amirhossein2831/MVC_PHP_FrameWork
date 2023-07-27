@@ -18,7 +18,7 @@ class Application
         self::$ROOT = dirname(__DIR__);
         $this->request = new Request();
         $this->response = new Response();
-        $this->router = new Router($this->request,$this->response);
+        $this->router = new Router();
         $this->dataBase = new DataBase($config['db']);
         self::$app = $this;
     }
@@ -61,6 +61,14 @@ class Application
     public function getResponse(): Response
     {
         return $this->response;
+    }
+
+    /**
+     * @return Request
+     */
+    public function getRequest(): Request
+    {
+        return $this->request;
     }
 
 }

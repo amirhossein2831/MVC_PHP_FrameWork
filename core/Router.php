@@ -8,16 +8,13 @@ use App\Controller\SiteController;
 class Router implements RouterMethod
 {
     protected array $routes;
-    private Request $request;
-    private Response $response;
 
-    public function __construct(Request $request,Response $response){
-        $this->request = $request;
-        $this->response = $response;
+    public function __construct()
+    {
         $this->routes = [];
     }
 
-    public function get($path,$callback): void
+    public function get($path, $callback): void
     {
         $this->routes ['GET'][$path] = $callback;
     }
@@ -29,14 +26,16 @@ class Router implements RouterMethod
 
     public function resolve(): void
     {
-        $path = $this->request->getPath();
-        $method = $this->request->method();
+        $request = Application::$app->getRequest();
+        $response = Application::$app->getResponse();
+        $path = $request->getPath();
+        $method = $request->method();
         $callback = $this->routes[$method][$path] ?? false;
         if (!$callback) {
-            $this->response->setStatusCode(404);
-            call_user_func([SiteController::class,'notFount']);
+            $response->setStatusCode(404);
+            call_user_func([SiteController::class, 'notFount']);
             exit;
         }
-        call_user_func($callback,$this->request);
+        call_user_func($callback, $request);
     }
 }
