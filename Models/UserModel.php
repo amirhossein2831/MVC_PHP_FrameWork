@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\core\DBModel;
@@ -47,12 +46,12 @@ class UserModel extends DBModel
                 }
             }
         }
-        return $this->hasError();
+        return !$this->hasError();
     }
 
-    public function register()
+    public function register(): bool
     {
-        //TODO: save the date in DB
+        return $this->save();
     }
 
     public function rules(): array
@@ -65,4 +64,8 @@ class UserModel extends DBModel
         return 'users';
     }
 
+    protected function column(): array
+    {
+        return ['firstName','lastName','email','password'];
+    }
 }
