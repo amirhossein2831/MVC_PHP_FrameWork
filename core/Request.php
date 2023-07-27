@@ -10,7 +10,7 @@ class Request
         return substr($path, 0, strpos($path, "?") ?: strlen($path));
     }
 
-    public function getBody()
+    public function getBody(): array
     {
         $body = [];
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -31,12 +31,12 @@ class Request
         return $_SERVER["REQUEST_METHOD"];
     }
 
-    public function isPost()
+    public function isPost(): bool
     {
         return $this->method() === 'POST';
     }
 
-    public function isGet()
+    public function isGet(): bool
     {
         return $this->method() === 'GET';
     }

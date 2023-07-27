@@ -27,7 +27,7 @@ class Router implements RouterMethod
         $this->routes ['POST'][$path] = $callback;
     }
 
-    public function resolve()
+    public function resolve(): void
     {
         $path = $this->request->getPath();
         $method = $this->request->method();

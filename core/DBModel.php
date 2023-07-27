@@ -9,18 +9,19 @@ abstract class DBModel extends BaseModel
     protected abstract function DBName(): string;
     protected abstract function column(): array;
 
-    public function save(): true
+    public function save(): bool
     {
         $tableName = $this->DBName();
         $attributes = $this->column();
         $param = implode(",", array_map(fn($str) => ":$str", $attributes));
         $columns = implode(",", $attributes);
-        $statement = $this->getPdo()->prepare("INSERT INTO $tableName ($columns) VALUES($param);");
+
+        $SQL = "INSERT INTO $tableName ($columns) VALUES($param);";
+        $statement = $this->getPdo()->prepare($SQL);
         foreach ($attributes as $attribute) {
             $statement->bindValue(":$attribute", $this->{$attribute});
         }
-        $statement->execute();
-        return true;
+        return $statement->execute();
     }
 
     public function getPdo(): PDO
