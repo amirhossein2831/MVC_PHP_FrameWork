@@ -65,4 +65,9 @@ class DataBase
         $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES $migrations");
         $statement->execute();
     }
+    
+    public function getPdo(): PDO
+    {
+        return $this->pdo;
+    }
 }

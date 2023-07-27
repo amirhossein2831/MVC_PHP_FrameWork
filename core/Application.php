@@ -13,12 +13,14 @@ class Application
     private Router $router;
     private DataBase $dataBase;
 
+    public static Application $app;
     public function __construct(array $config){
         self::$ROOT = dirname(__DIR__);
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request,$this->response);
         $this->dataBase = new DataBase($config['db']);
+        self::$app = $this;
     }
 
     public function run(): void
@@ -45,8 +47,12 @@ class Application
         return $this->router;
     }
 
+    /**
+     * @return DataBase
+     */
     public function getDataBase(): DataBase
     {
         return $this->dataBase;
     }
+
 }
