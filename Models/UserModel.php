@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Models;
 
-use App\core\BaseModel;
+use App\core\DBModel;
 use App\Rule\RegisterRule;
 
-class RegisterModel extends BaseModel
+class UserModel extends DBModel
 {
     public string $firstName;
     public string $lastName;
@@ -47,16 +46,26 @@ class RegisterModel extends BaseModel
                 }
             }
         }
-        return $this->hasError();
+        return !$this->hasError();
     }
 
-    public function register()
+    public function register(): bool
     {
-        //TODO: save the date in DB
+        return $this->save();
     }
 
     public function rules(): array
     {
         return RegisterRule::rules();
+    }
+
+    protected function DBName(): string
+    {
+        return 'users';
+    }
+
+    protected function column(): array
+    {
+        return ['firstName','lastName','email','password'];
     }
 }

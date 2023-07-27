@@ -5,34 +5,34 @@ namespace App\Controller;
 use App\Component\Interface\Authentication;
 use App\core\BaseController;
 use App\core\Request;
-use App\Models\RegisterModel;
+use App\Models\UserModel;
 
 class AuthController extends BaseController implements Authentication
 {
     public function login(Request $request)
     {
-        $registerModel = new RegisterModel();           //TODO change with Login model
+        $userModel = new UserModel();           //TODO change with Login model
 
         if ($request->isPost()) {
             echo "should work with post";
         }
         $this->renderView('login', 'newLayout',[
-            'model' => $registerModel
+            'model' => $userModel
         ]);
     }
 
-    public function register(Request $request)
+    public function register(Request $request): void
     {
-        $registerModel = new RegisterModel();
+        $userModel = new UserModel();
         if ($request->isPost()) {
-            $registerModel->loadDate($request->getBody());
-
-            if ($registerModel->validate() && $registerModel->register()) {
-                return 'success';
+            $userModel->loadDate($request->getBody());
+            if ($userModel->validate() &&  $userModel->register()) {
+                echo "success";
+                return;
             }
         }
         $this->renderView('register', 'newLayout', [
-            'model' => $registerModel
+            'model' => $userModel
         ]);
     }
 }

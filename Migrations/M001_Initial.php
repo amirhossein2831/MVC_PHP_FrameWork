@@ -21,7 +21,7 @@ class M001_Initial implements Migration
                 email VARCHAR(255) NOT NULL,
                 firstName VARCHAR(255) NOT NULL,
                 lastName VARCHAR(255) NOT NULL,
-                status TINYINT NOT NULL,
+                status TINYINT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 ) ENGINE=InnoDB;";
         $this->pdo->exec($SQL);
