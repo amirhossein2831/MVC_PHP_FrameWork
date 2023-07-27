@@ -1,9 +1,11 @@
 <?php
 namespace App\Models;
 
+use App\core\Application;
 use App\core\DBModel;
 use App\core\Response;
 use App\Rule\RegisterRule;
+use PDO;
 
 class UserModel extends DBModel
 {
@@ -47,6 +49,18 @@ class UserModel extends DBModel
                 }
                 if ($ruleName === RegisterRule::MATCH_FIELD && $value != $this->{$rule['match']}) {
                     $this->addError($attribute, RegisterRule::MATCH_FIELD, $rule);
+                }
+                if ($ruleName === RegisterRule::UNIQUE_EMAIL) {
+                    $className = $rule['class'];
+                    $tableName = $className::DBName();
+                    $uniqueAttribute = $rule['attribute'] ?? $attribute;
+                    $statement = Application::$app->getDataBase()->getPdo()->prepare("SELECT * FROM $tableName WHERE $uniqueAttribute= :value");
+                    $statement->bindValue(':value', $value);
+                    $statement->execute();
+                    $records = $statement->fetch(PDO::FETCH_ASSOC);
+                    if (!empty($records)) {
+                        $this->addError($attribute, RegisterRule::UNIQUE_EMAIL);
+                    }
                 }
             }
         }
