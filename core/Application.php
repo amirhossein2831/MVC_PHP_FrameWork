@@ -55,4 +55,12 @@ class Application
         return $this->dataBase;
     }
 
+    /**
+     * @return Response
+     */
+    public function getResponse(): Response
+    {
+        return $this->response;
+    }
+
 }
