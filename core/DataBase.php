@@ -2,6 +2,7 @@
 
 namespace App\core;
 
+use App\Component\Util\Util;
 use PDO;
 
 class DataBase
@@ -31,15 +32,15 @@ class DataBase
             $migrationClass = pathinfo($migration, PATHINFO_FILENAME);
             $class = str_replace('class', $migrationClass, $class);
             $instance = new $class($this->pdo);
-            $this->log('Migration is Applying');
+            Util::log('Migration is Applying');
             $instance->up();
-            $this->log('Migration is Applied');
+            Util::log('Migration is Applied');
             $newMigrations[] = $migration;
         }
         if (!empty($newMigrations)) {
             $this->saveMigration($newMigrations);
         } else
-            $this->log('All Migration Applied');
+            Util::log('All Migration Applied');
     }
 
     public function createMigrationTable(): void
@@ -58,5 +59,10 @@ class DataBase
         return $statement->fetchAll(PDO::FETCH_COLUMN);
     }
 
-
+    private function saveMigration(array $migrations): void
+    {
+        $migrations = implode(",", array_map(fn($m) => "('$m')", $migrations));
+        $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES $migrations");
+        $statement->execute();
+    }
 }
