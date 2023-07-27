@@ -1,19 +1,21 @@
 <?php use App\core\Form\Field,App\core\Form\Form;?>
-<?php Form::header('Register New Account');?>
-<?php $form = Form::begin('', 'post'); ?>
+<div id="container" class="wrapper" style="height: 700px">
 
-    <div class="row">
-        <div class="col"><?php echo $form->field($model, 'firstName', Field::TEXT_FIELD); ?></div>
-        <div class="col"><?php echo $form->field($model, 'lastName',Field::TEXT_FIELD); ?></div>
+    <div class="form-box register">
+        <h2>Registration</h2>
+        <?php $form = Form::begin('', 'post'); ?>
+
+        <?php echo $form->field($model, 'firstName', Field::TEXT_FIELD,'person'); ?>
+        <?php echo $form->field($model, 'lastName',Field::TEXT_FIELD,'person'); ?>
+        <?php echo $form->field($model, 'password',Field::PASSWORD_FIELD,'lock-closed'); ?>
+        <?php echo $form->field($model, 'confirmPassword',Field::PASSWORD_FIELD,'lock-closed'); ?>
+        <?php echo $form->field($model, 'email',Field::TEXT_FIELD,'mail' ); ?>
+
+        <button type="submit" class="btn">Register</button>
+        <div class="login-register">
+            <p>Already have an account?<a href="/login" class="register-link">Login</a></p>
+        </div>
+
+        <?php Form::end(); ?>
     </div>
-
-    <?php echo $form->field($model, 'password',Field::PASSWORD_FIELD); ?>
-    <?php echo $form->field($model, 'confirmPassword',Field::PASSWORD_FIELD); ?>
-    <?php echo $form->field($model, 'email',Field::TEXT_FIELD ); ?>
-
-    <div class="row">
-        <div class="col"><button type="submit" class="btn btn-primary">Submit</button></div>
-        <div class="col"><a href="/" class="btn btn-primary">Go Back to Home</a></div>
-    </div>
-
-<?php Form::end(); ?>
+</div>
