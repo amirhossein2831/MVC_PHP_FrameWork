@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\core\DBModel;
+use App\core\Response;
 use App\Rule\RegisterRule;
 
 class UserModel extends DBModel
@@ -11,6 +12,7 @@ class UserModel extends DBModel
     public string $password;
     public string $confirmPassword;
     public string $email;
+    public mixed $status;
 
     public function __construct()
     {
@@ -19,6 +21,8 @@ class UserModel extends DBModel
         $this->password = '';
         $this->confirmPassword = '';
         $this->email = '';
+        $this->status = Response::IN_ACTIVE_STATUS;
+
     }
 
     public function validate(): bool
@@ -49,9 +53,11 @@ class UserModel extends DBModel
         return !$this->hasError();
     }
 
-    public function register(): bool
+    public function save(): bool
     {
-        return $this->save();
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        $this->status = Response::ACTIVE_STATUS;
+        return parent::save();
     }
 
     public function rules(): array
@@ -66,6 +72,6 @@ class UserModel extends DBModel
 
     protected function column(): array
     {
-        return ['firstName','lastName','email','password'];
+        return ['firstName','lastName','email','password','status'];
     }
 }

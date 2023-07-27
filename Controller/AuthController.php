@@ -26,7 +26,7 @@ class AuthController extends BaseController implements Authentication
         $userModel = new UserModel();
         if ($request->isPost()) {
             $userModel->loadDate($request->getBody());
-            if ($userModel->validate() &&  $userModel->register()) {
+            if ($userModel->validate() &&  $userModel->save()) {
                 echo "success";
                 return;
             }
