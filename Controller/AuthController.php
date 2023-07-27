@@ -11,10 +11,14 @@ class AuthController extends BaseController implements Authentication
 {
     public function login(Request $request)
     {
+        $registerModel = new RegisterModel();           //TODO change with Login model
+
         if ($request->isPost()) {
             echo "should work with post";
         }
-        $this->renderView('login', 'auth');
+        $this->renderView('login', 'newLayout',[
+            'model' => $registerModel
+        ]);
     }
 
     public function register(Request $request)
@@ -27,7 +31,7 @@ class AuthController extends BaseController implements Authentication
                 return 'success';
             }
         }
-        $this->renderView('register', 'auth', [
+        $this->renderView('register', 'newLayout', [
             'model' => $registerModel
         ]);
     }
