@@ -2,10 +2,10 @@
 
 namespace App\Migrations;
 
-use App\Component\Interface\MIgration;
+use App\Component\Interface\Migration;
 use PDO;
 
-class M001_Initial implements MIgration
+class M001_Initial implements Migration
 {
     private PDO $pdo;
 

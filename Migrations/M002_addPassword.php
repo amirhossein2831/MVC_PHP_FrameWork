@@ -2,10 +2,10 @@
 
 namespace App\Migrations;
 
-use App\Component\Interface\MIgration;
+use App\Component\Interface\Migration;
 use PDO;
 
-class M002_addPassword implements MIgration
+class M002_addPassword implements Migration
 {
     private PDO $pdo;
 

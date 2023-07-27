@@ -2,7 +2,7 @@
 
 namespace App\Component\Interface;
 
-interface MIgration
+interface Migration
 {
     public function up();
     public function down();
