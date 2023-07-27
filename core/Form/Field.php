@@ -24,26 +24,36 @@ class Field
 
     private string $type;
 
-    public function __construct(RegisterModel $model, string $attribute,$type)
+    private string $iconType;
+
+    public function __construct(RegisterModel $model, string $attribute, $type, $iconType)
     {
         $this->model = $model;
         $this->attribute = $attribute;
         $this->type = $type;
+        $this->iconType = $iconType;
     }
+
     public function __toString(): string
     {
+        $hasError = $this->model->hasError($this->attribute);
+        $string = $hasError ? sprintf('<div class="error-text">%s</div>', $this->model->getError($this->attribute)) : '';
+
         return sprintf('
-           <div class="mb-3">
-              <label style="font-size: 20px;font-family:FreeSans,serif;margin-bottom: 5px">%s</label>
-              <input type="%s" name="%s"  value="%s" class="form-control%s">
-              <div class="invalid-feedback">%s</div>
-         </div>
-        ',$this->attribute
-         ,$this->type
-         ,$this->attribute
-         ,$this->model->{$this->attribute}
-         ,$this->model->hasError($this->attribute)? ' is-invalid' : ''
-         ,$this->model->getError($this->attribute)
+             <div class="input-box%s">
+                 <span class="icon">
+                        <ion-icon name="%s"></ion-icon>
+                 </span>
+                <input id="firstName" name="%s" value="%s" type="%s">
+                <label id="firstName-label">%s</label>
+             </div>%s
+           ', $hasError ? ' error-box' : ''
+            , $this->iconType
+            , $this->attribute
+            , $this->model->{$this->attribute}
+            , $this->type
+            , $this->attribute
+            , $string
         );
     }
 }
