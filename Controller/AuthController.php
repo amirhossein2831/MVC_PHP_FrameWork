@@ -21,14 +21,14 @@ class AuthController extends BaseController implements Authentication
         ]);
     }
 
-    public function register(Request $request)
+    public function register(Request $request): void
     {
         $userModel = new UserModel();
         if ($request->isPost()) {
             $userModel->loadDate($request->getBody());
-
-            if ($userModel->validate() && $userModel->register()) {
-                return 'success';
+            if ($userModel->validate() &&  $userModel->register()) {
+                echo "success";
+                return;
             }
         }
         $this->renderView('register', 'newLayout', [
