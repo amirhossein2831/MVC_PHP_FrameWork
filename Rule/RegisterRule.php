@@ -34,8 +34,7 @@ class RegisterRule extends Rules
             self::MIN_LENGTH => 'The length of this field must be more than {min}',
             self::MAX_LENGTH => 'The length of this field must be less than {max}',
             self::MATCH_FIELD => 'This field must be match with {match}',
-            self::UNIQUE_EMAIL => 'The email is already taken',
+            self::UNIQUE_EMAIL => 'The {attribute} is already taken',
         ];
     }
-
 }
