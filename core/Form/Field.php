@@ -2,7 +2,7 @@
 
 namespace App\core\Form;
 
-use App\Models\RegisterModel;
+use App\Models\UserModel;
 
 class Field
 {
@@ -19,14 +19,14 @@ class Field
     public const RANGE_FIELD = 'range';
     public const COLOR_FIELD = 'color';
 
-    private RegisterModel $model;
+    private UserModel $model;
     private string $attribute;
 
     private string $type;
 
     private string $iconType;
 
-    public function __construct(RegisterModel $model, string $attribute, $type, $iconType)
+    public function __construct(UserModel $model, string $attribute, $type, $iconType)
     {
         $this->model = $model;
         $this->attribute = $attribute;

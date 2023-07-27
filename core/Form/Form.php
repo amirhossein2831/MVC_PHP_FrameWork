@@ -2,7 +2,7 @@
 
 namespace App\core\Form;
 
-use App\Models\RegisterModel;
+use App\Models\UserModel;
 
 class Form
 {
@@ -17,7 +17,7 @@ class Form
         return new Form();
     }
 
-    public function field(RegisterModel $model, $attribute, $type, $iconType): Field
+    public function field(UserModel $model, $attribute, $type, $iconType): Field
     {
         return new Field($model, $attribute, $type, $iconType);
     }
