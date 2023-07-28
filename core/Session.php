@@ -8,22 +8,43 @@ class Session implements SessionStorage
 {
     public const FLASH_KEY = 'flash_message';
 
-    public function __construct(){
+    /**
+     * in the constructor, mark the existing SessionFlash to delete in destructor
+     */
+    public function __construct()
+    {
         session_start();
+        $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
+        foreach ($flashMessages as &$flashMessage) {
+            $flashMessage['remove'] = true;
+        }
+        $_SESSION[self::FLASH_KEY] = $flashMessages;
     }
 
-    public function setFlash($key,string $message): void
+    /**
+     * this method find existing SessionFlash and delete it
+     */
+    public function __destruct()
     {
-        $_SESSION[self::FLASH_KEY][$key] = $message;
+        $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
+        foreach ($flashMessages as $key => &$flashMessage) {
+            if ($flashMessage['remove']) {
+                unset($flashMessages[$key]);
+            }
+        }
+        $_SESSION[self::FLASH_KEY] = $flashMessages;
+    }
 
+    public function setFlash($key, string $message): void
+    {
+        $_SESSION[self::FLASH_KEY][$key] = [
+            'value' => $message,
+            'remove' => false,
+        ];
     }
 
     public function getFlash($key): mixed
     {
-        return $_SESSION[self::FLASH_KEY][$key];
-    }
-    public function __destruct()
-    {
-        session_clo
+        return $_SESSION[self::FLASH_KEY][$key]['value'] ?? false;
     }
 }
