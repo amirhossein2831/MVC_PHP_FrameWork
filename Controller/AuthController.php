@@ -28,8 +28,8 @@ class AuthController extends BaseController implements Authentication
         if ($request->isPost()) {
             $userModel->loadDate($request->getBody());
             if ($userModel->validate() && $userModel->save()) {
-                Application::$app->getResponse()->redirect('/home');
-                echo "success";
+                Application::$app->getSession()->setFlash('success','Thanks for registration');
+                Application::$app->getResponse()->redirect('/login');
                 return;
             }
         }
