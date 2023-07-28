@@ -238,11 +238,11 @@ body {
 }
 
 .error-box {
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid #BC0303;
 }
 
 .error-text {
-    color: red;
+    color: #BC0303;
     font-size: .8em;
 
     margin-top: -25px
