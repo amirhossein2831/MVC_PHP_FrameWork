@@ -1,5 +1,5 @@
 <?php use App\core\Form\Field,App\core\Form\Form;?>
-<div id="container" class="wrapper" style="height: 700px">
+<div id="container" class="wrapper" style="height: auto">
 
     <div class="form-box register">
         <h2>Registration</h2>
