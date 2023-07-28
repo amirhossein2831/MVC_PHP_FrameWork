@@ -4,6 +4,6 @@ namespace App\Component\Interface;
 
 interface SessionStorage
 {
-    public function setFlush();
-    public function getFlush();
+    public function setFlash($key,string $message): void;
+    public function getFlash($key):mixed;
 }
