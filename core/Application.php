@@ -12,14 +12,17 @@ class Application
     private Response $response;
     private Router $router;
     private DataBase $dataBase;
+    private Session $session;
 
     public static Application $app;
+
     public function __construct(array $config){
         self::$ROOT = dirname(__DIR__);
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router();
         $this->dataBase = new DataBase($config['db']);
+        $this->session = new Session();
         self::$app = $this;
     }
 
@@ -69,6 +72,14 @@ class Application
     public function getRequest(): Request
     {
         return $this->request;
+    }
+
+    /**
+     * @return Session
+     */
+    public function getSession(): Session
+    {
+        return $this->session;
     }
 
 }
