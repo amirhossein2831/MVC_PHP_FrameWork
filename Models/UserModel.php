@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\core\Application;
@@ -58,7 +59,7 @@ class UserModel extends DBModel
                     $statement->execute();
                     $records = $statement->fetch(PDO::FETCH_ASSOC);
                     if (!empty($records)) {
-                        $this->addError($attribute, RegisterRule::UNIQUE_EMAIL,['attribute' => $attribute]);
+                        $this->addError($attribute, RegisterRule::UNIQUE_EMAIL, ['attribute' => $this->labels()[$attribute]]);
                     }
                 }
             }
@@ -85,6 +86,17 @@ class UserModel extends DBModel
 
     protected function column(): array
     {
-        return ['firstName','lastName','email','password','status'];
+        return ['firstName', 'lastName', 'email', 'password', 'status'];
+    }
+
+    public function labels(): array
+    {
+        return [
+            'firstName' => 'First Name',
+            'lastName' => 'Last Name',
+            'password' => 'Password',
+            'confirmPassword' => "Confirm Password",
+            'email' => 'Email',
+        ];
     }
 }

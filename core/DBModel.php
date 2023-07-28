@@ -8,6 +8,7 @@ abstract class DBModel extends BaseModel
 {
     protected abstract function DBName(): string;
     protected abstract function column(): array;
+    protected abstract function labels(): array;
 
     public function save(): bool
     {
