@@ -3,7 +3,6 @@
 namespace App\core;
 
 use App\Component\Interface\RouterMethod;
-use App\Controller\SiteController;
 use App\core\Exception\PageNotFoundException;
 
 class Router implements RouterMethod
@@ -46,11 +45,5 @@ class Router implements RouterMethod
             throw new PageNotFoundException();
         }
         call_user_func($callback, $request);
-    }
-
-    public function notFound($response): void
-    {
-        $response->setStatusCode(404);
-        call_user_func([SiteController::class, 'notFount']);
     }
 }
