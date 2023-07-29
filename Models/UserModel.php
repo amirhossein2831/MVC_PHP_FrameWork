@@ -40,19 +40,19 @@ class UserModel extends DBModel
                 $ruleName = is_string($rule) ? $rule : $rule[0];
 
                 if ($ruleName === Rules::REQUIRED_FIELD && !$value) {
-                    $this->addError($attribute, Rules::REQUIRED_FIELD);
+                    $this->addErrorForRule($attribute, Rules::REQUIRED_FIELD);
                 }
                 if ($ruleName === Rules::EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    $this->addError($attribute, Rules::EMAIL);
+                    $this->addErrorForRule($attribute, Rules::EMAIL);
                 }
                 if ($ruleName === Rules::MIN_LENGTH && strlen($value) < $rule['min']) {
-                    $this->addError($attribute, Rules::MIN_LENGTH, $rule);
+                    $this->addErrorForRule($attribute, Rules::MIN_LENGTH, $rule);
                 }
                 if ($ruleName === Rules::MAX_LENGTH && strlen($value) > $rule['max']) {
-                    $this->addError($attribute, Rules::MAX_LENGTH, $rule);
+                    $this->addErrorForRule($attribute, Rules::MAX_LENGTH, $rule);
                 }
                 if ($ruleName === Rules::MATCH_FIELD && $value != $this->{$rule['match']}) {
-                    $this->addError($attribute, Rules::MATCH_FIELD, $rule);
+                    $this->addErrorForRule($attribute, Rules::MATCH_FIELD, $rule);
                 }
                 if ($ruleName === Rules::UNIQUE_EMAIL) {
                     $className = $rule['class'];
@@ -62,7 +62,7 @@ class UserModel extends DBModel
                     $statement->execute();
                     $records = $statement->fetch(PDO::FETCH_ASSOC);
                     if (!empty($records)) {
-                        $this->addError($attribute, Rules::UNIQUE_EMAIL, ['attribute' => $this->labels()[$attribute]]);
+                        $this->addErrorForRule($attribute, Rules::UNIQUE_EMAIL, ['attribute' => $this->labels()[$attribute]]);
                     }
                 }
             }
