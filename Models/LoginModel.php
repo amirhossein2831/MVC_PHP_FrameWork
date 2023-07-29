@@ -52,17 +52,17 @@ class LoginModel extends BaseModel
         ];
     }
 
-    public function login()
+    public function login(): bool
     {
         $user = new UserModel();
         $date = $user->findUserByEmail(['email' => $this->email]);
         if ($date === false) {
-            $this->addError('email','the user does not exits with this Email');
+            $this->addError('email', 'the user does not exits with this Email');
             return false;
         }
         $user->loadDate($date);
         if (!password_verify($this->password, $user->password)) {
-            $this->addError('password','Password is incorrect');
+            $this->addError('password', 'Password is incorrect');
             return false;
         }
         return Application::$app->login($user);

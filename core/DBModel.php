@@ -35,6 +35,15 @@ abstract class DBModel extends BaseModel
         return $statement->fetch(PDO::FETCH_ASSOC);
 
     }
+    public function findUserById($where)
+    {
+        $tableName = $this->DBName();
+        $id = $where['id'];
+        $statement = $this->getPdo()->prepare("SELECT * FROM $tableName WHERE id='$id'");
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+
+    }
 
     public function getPdo(): PDO
     {
