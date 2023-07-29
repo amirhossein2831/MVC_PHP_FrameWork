@@ -2,6 +2,7 @@
 
 namespace App\core\Form;
 
+use App\core\Application;
 use App\core\BaseModel;
 
 class Form
@@ -21,4 +22,48 @@ class Form
     {
         echo '</form>';
     }
+
+    public static function successRegister(): void
+    {
+        $session = Application::$app->getSession();
+        $message = $session->getFlash('success');
+
+        if ($session->getFlash('success')) {
+            echo '
+                    <div class="alert alert-success" id="successAlert">
+                        <span style="text-align: center;color: darkcyan;font-style: italic">' . $message . ' 
+                        <br> <p style="font-size: 15px;color: black">now you can login</p></span>
+                        <button type="button" class="close-button" onclick="closeAlert()">x</button>
+                    </div>
+                  ';
+        }
+    }
+
+    public function rememberMe(): void
+    {
+        echo '
+             <div class="remember-forget">
+                <label ><input type="checkbox">Remember me</label>
+                <a href="">ForgetPassword</a>
+             </div>
+        ';
+    }
+
+    public function submitButton($type): void
+    {
+        echo sprintf('<button type="submit" class="btn">%s</button>', $type);
+    }
+
+    public function loginRegisterRedirect($link, $type, $note): void
+    {
+        echo sprintf(' 
+                 <div class="login-register">
+                   <p>%s<a href="%s" class="register-link">%s</a></p>
+                </div>'
+            , $note
+            , $link
+            , $type);
+    }
+
+
 }
