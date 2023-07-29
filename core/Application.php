@@ -4,6 +4,7 @@ namespace App\core;
 
 use App\Controller\AuthController;
 use App\Controller\SiteController;
+use App\core\Exception\ForbiddenException;
 use App\Models\UserModel;
 
 class Application
@@ -17,6 +18,8 @@ class Application
 
     public static Application $app;
     private ?UserModel $user;
+    private BaseController $controller;
+
 
     public function __construct(array $config)
     {
@@ -32,13 +35,27 @@ class Application
 
     public function run(): void
     {
-        $this->router->resolve();
+        try {
+            $this->router->resolve();
+        } catch (Exception\PageNotFoundException $exception) {
+            $this->response->setStatusCode(404);
+            $this->controller->renderView('error','errorLayout',[
+                'exception'=>$exception
+            ]);
+        }catch (ForbiddenException $exception){
+            $this->response->setStatusCode(403);    
+            $this->controller->renderView('error','errorLayout',[
+                'exception'=>$exception
+            ]);
+        }
+
     }
 
     public function initialRouter(): void
     {
         $siteController = new SiteController();
         $authController = new AuthController();
+        $this->controller = $authController;
         $this->getRouter()->get('/', [$siteController, 'home']);
         $this->getRouter()->get('/home', [$siteController, 'home']);
         $this->getRouter()->get('/contact', [$siteController, 'contact']);

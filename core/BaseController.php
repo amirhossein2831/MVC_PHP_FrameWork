@@ -2,16 +2,24 @@
 
 namespace App\core;
 
+use App\core\Middlewares\BaseMiddleware;
+
 abstract class BaseController
 {
-    protected function renderView($view, $layout,$param = []): void
+    /**
+     * @var BaseMiddleware[]
+     */
+    public array $middlewares = [];
+    public static string $action = '';
+
+    public function renderView($view, $layout, $param = []): void
     {
         $layoutContent = $this->contentOfLayout($layout);
-        $viewContent = $this->contentOfView($view,$param);
+        $viewContent = $this->contentOfView($view, $param);
         echo str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    private function contentOfView($view,$param = []): false|string
+    private function contentOfView($view, $param = []): false|string
     {
         foreach ($param as $key => $value) {
             $$key = $value;
@@ -26,6 +34,11 @@ abstract class BaseController
         ob_start();
         include_once Application::$ROOT . "/Views/layout/$layout.php";
         return ob_get_clean();
+    }
+
+    protected function registerMiddleware(BaseMiddleware $middleware): void
+    {
+        $this->middlewares[] = $middleware;
     }
 
 }
