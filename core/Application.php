@@ -48,6 +48,8 @@ class Application
         $this->getRouter()->post('/login', [$authController, 'login']);
         $this->getRouter()->get('/register', [$authController, 'register']);
         $this->getRouter()->post('/register', [$authController, 'register']);
+        $this->getRouter()->get('/logout', [$authController, 'logout']);
+        $this->getRouter()->post('/logout', [$authController, 'logout']);
     }
 
     public final function getRouter(): Router
@@ -108,5 +110,10 @@ class Application
             $this->user->loadDate($date);
         } else
             $this->user = null;
+    }
+
+    public function isGuest(): bool
+    {
+        return is_null($this->user);
     }
 }
