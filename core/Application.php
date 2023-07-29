@@ -4,6 +4,7 @@ namespace App\core;
 
 use App\Controller\AuthController;
 use App\Controller\SiteController;
+use App\core\Exception\ForbiddenException;
 use App\Models\UserModel;
 
 class Application
@@ -32,7 +33,11 @@ class Application
 
     public function run(): void
     {
-        $this->router->resolve();
+        try {
+            $this->router->resolve();
+        } catch (ForbiddenException|Exception\PageNotFoundException $exception) {
+            $this->router->notFound($this->response);
+        }
     }
 
     public function initialRouter(): void
