@@ -42,6 +42,7 @@ class LoginModel extends BaseModel
         }
         return !$this->hasError();
     }
+
     public function labels(): array
     {
         return [
