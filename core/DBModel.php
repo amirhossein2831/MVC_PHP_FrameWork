@@ -2,6 +2,7 @@
 
 namespace App\core;
 
+use App\Models\UserModel;
 use PDO;
 
 abstract class DBModel extends BaseModel
@@ -23,6 +24,16 @@ abstract class DBModel extends BaseModel
             $statement->bindValue(":$attribute", $this->{$attribute});
         }
         return $statement->execute();
+    }
+
+    public function findUserByEmail($where)
+    {
+        $tableName = $this->DBName();
+        $email = $where['email'];
+        $statement = $this->getPdo()->prepare("SELECT * FROM $tableName WHERE email='$email'");
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+
     }
 
     public function getPdo(): PDO
