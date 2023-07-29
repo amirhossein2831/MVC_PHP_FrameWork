@@ -11,6 +11,7 @@ use PDO;
 
 class UserModel extends DBModel
 {
+    public string $id;
     public string $firstName;
     public string $lastName;
 
@@ -19,6 +20,7 @@ class UserModel extends DBModel
 
     public string $email;
     public mixed $status;
+
 
     public function __construct()
     {
