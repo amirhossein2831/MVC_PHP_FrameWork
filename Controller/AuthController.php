@@ -33,7 +33,7 @@ class AuthController extends BaseController implements Authentication
         if ($request->isPost()) {
             $userModel->loadDate($request->getBody());
             if ($userModel->validate() && $userModel->save()) {
-                Application::$app->getSession()->setFlash('success','Thanks for registration');
+                Application::$app->getSession()->setFlash('success', 'Thanks for registration');
                 Application::$app->getResponse()->redirect('/login');
                 return;
             }
@@ -41,5 +41,18 @@ class AuthController extends BaseController implements Authentication
         $this->renderView('register', 'newLayout', [
             'model' => $userModel
         ]);
+    }
+
+    public function logout(Request $request): void
+    {
+        if ($request->isPost()) {
+            $logout = $request->getBody();
+            if ($logout['logout'] === 'ok') {
+                Application::$app->logout();
+            }
+            Application::$app->getResponse()->redirect('/home');
+            return;
+        }
+        $this->renderView('logout', 'newLayout');
     }
 }
