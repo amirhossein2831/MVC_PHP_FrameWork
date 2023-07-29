@@ -6,14 +6,13 @@ use App\core\Middlewares\BaseMiddleware;
 
 abstract class BaseController
 {
-
-
     /**
      * @var BaseMiddleware[]
      */
-    private array $middlewares = [];
+    public array $middlewares = [];
+    public static string $action = '';
 
-    protected function renderView($view, $layout, $param = []): void
+    public function renderView($view, $layout, $param = []): void
     {
         $layoutContent = $this->contentOfLayout($layout);
         $viewContent = $this->contentOfView($view, $param);
@@ -37,8 +36,9 @@ abstract class BaseController
         return ob_get_clean();
     }
 
-    protected function registerMiddleware(BaseMiddleware $middleware)
+    protected function registerMiddleware(BaseMiddleware $middleware): void
     {
         $this->middlewares[] = $middleware;
     }
+
 }
