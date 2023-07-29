@@ -315,3 +315,27 @@ body {
 .logout-container span{
     color: #ffffff;
 }
+.profile-container {
+    margin-bottom: 30px;
+}
+.profile-field {
+    text-align: left;
+    padding: 20px;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    height: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1.3em;
+    left: 0;
+}
+.profile-field span{
+    font-size: 18px;
+    font-weight: lighter;
+    color: darkgrey;
+}
+.profile-header{
+    margin-top: 15px;
+    color: #ffffff;
+    font-size: 1.4em;
+}
