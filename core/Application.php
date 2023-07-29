@@ -37,7 +37,13 @@ class Application
     {
         try {
             $this->router->resolve();
-        } catch (ForbiddenException | Exception\PageNotFoundException $exception) {
+        } catch (Exception\PageNotFoundException $exception) {
+            $this->response->setStatusCode(404);
+            $this->controller->renderView('error','errorLayout',[
+                'exception'=>$exception
+            ]);
+        }catch (ForbiddenException $exception){
+            $this->response->setStatusCode(403);    
             $this->controller->renderView('error','errorLayout',[
                 'exception'=>$exception
             ]);
