@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\core\Application;
 use App\core\BaseModel;
 use App\core\Rules;
 use App\Rule\LoginRule;
@@ -33,10 +34,10 @@ class LoginModel extends BaseModel
                 $ruleName = is_string($rule) ? $rule : $rule[0];
 
                 if ($ruleName === Rules::REQUIRED_FIELD && !$value) {
-                    $this->addError($attribute, Rules::REQUIRED_FIELD);
+                    $this->addErrorForRule($attribute, Rules::REQUIRED_FIELD);
                 }
                 if ($ruleName === Rules::EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    $this->addError($attribute, Rules::EMAIL);
+                    $this->addErrorForRule($attribute, Rules::EMAIL);
                 }
             }
         }
@@ -49,5 +50,21 @@ class LoginModel extends BaseModel
             'password' => 'Password',
             'email' => 'Email',
         ];
+    }
+
+    public function login()
+    {
+        $user = new UserModel();
+        $date = $user->findUserByEmail(['email' => $this->email]);
+        if ($date === false) {
+            $this->addError('email','the user does not exits with this Email');
+            return false;
+        }
+        $user->loadDate($date);
+        if (!password_verify($this->password, $user->password)) {
+            $this->addError('password','Password is incorrect');
+            return false;
+        }
+        return Application::$app->login($user);
     }
 }
