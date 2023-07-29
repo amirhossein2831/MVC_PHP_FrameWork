@@ -50,6 +50,8 @@ class Application
         $this->getRouter()->post('/register', [$authController, 'register']);
         $this->getRouter()->get('/logout', [$authController, 'logout']);
         $this->getRouter()->post('/logout', [$authController, 'logout']);
+        $this->getRouter()->get('/profile', [$authController, 'profile']);
+        $this->getRouter()->post('/profile', [$authController, 'profile']);
     }
 
     public final function getRouter(): Router
