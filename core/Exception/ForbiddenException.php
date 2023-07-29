@@ -8,4 +8,9 @@ class ForbiddenException extends Exception
 {
     protected $message = "you don't have access to this page";
     protected $code = 403;
+
+    public function header(): string
+    {
+        return "Access Denied";
+    }
 }
