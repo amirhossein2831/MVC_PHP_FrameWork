@@ -6,11 +6,6 @@ use App\Models\UserModel;
 
 class Form
 {
-    public static function header($value): void
-    {
-        echo sprintf('<h1  style="font-family:FreeSans,serif;margin:30px 0 40px 0">%s</h1>', $value);
-    }
-
     public static function begin(string $action, string $method): Form
     {
         echo sprintf('<form action="%s" method="%s">', $action, $method);

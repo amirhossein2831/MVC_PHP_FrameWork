@@ -38,14 +38,13 @@ class Field
     {
         $hasError = $this->model->hasError($this->attribute);
         $string = $hasError ? sprintf('<div class="error-text">%s</div>', $this->model->getError($this->attribute)) : '';
-
         return sprintf('
              <div class="input-box%s">
                  <span class="icon">
                         <ion-icon name="%s"></ion-icon>
                  </span>
-                <input id="firstName" name="%s" value="%s" type="%s">
-                <label id="firstName-label">%s</label>
+                <input class="field-input" name="%s" value="%s" type="%s">
+                <label>%s</label>
              </div>%s
            ', $hasError ? ' error-box' : ''
             , $this->iconType
