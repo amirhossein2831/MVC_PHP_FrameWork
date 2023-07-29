@@ -18,6 +18,8 @@ class Application
 
     public static Application $app;
     private ?UserModel $user;
+    private BaseController $controller;
+
 
     public function __construct(array $config)
     {
@@ -35,15 +37,19 @@ class Application
     {
         try {
             $this->router->resolve();
-        } catch (ForbiddenException|Exception\PageNotFoundException $exception) {
-            $this->router->notFound($this->response);
+        } catch (ForbiddenException | Exception\PageNotFoundException $exception) {
+            $this->controller->renderView('error','errorLayout',[
+                'exception'=>$exception
+            ]);
         }
+
     }
 
     public function initialRouter(): void
     {
         $siteController = new SiteController();
         $authController = new AuthController();
+        $this->controller = $authController;
         $this->getRouter()->get('/', [$siteController, 'home']);
         $this->getRouter()->get('/home', [$siteController, 'home']);
         $this->getRouter()->get('/contact', [$siteController, 'contact']);
