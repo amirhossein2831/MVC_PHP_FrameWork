@@ -9,7 +9,7 @@ class LoginModel extends BaseModel
 
     protected function rules(): array
     {
-        // TODO: Implement rules() method.
+        // TODO: Implement validate() method.
     }
 
     protected function validate(): bool

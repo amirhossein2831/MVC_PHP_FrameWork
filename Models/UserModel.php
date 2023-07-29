@@ -5,6 +5,7 @@ namespace App\Models;
 use App\core\Application;
 use App\core\DBModel;
 use App\core\Response;
+use App\core\Rules;
 use App\Rule\RegisterRule;
 use PDO;
 
@@ -36,22 +37,22 @@ class UserModel extends DBModel
             foreach ($rules as $rule) {
                 $ruleName = is_string($rule) ? $rule : $rule[0];
 
-                if ($ruleName === RegisterRule::REQUIRED_FIELD && !$value) {
-                    $this->addError($attribute, RegisterRule::REQUIRED_FIELD);
+                if ($ruleName === Rules::REQUIRED_FIELD && !$value) {
+                    $this->addError($attribute, Rules::REQUIRED_FIELD);
                 }
-                if ($ruleName === RegisterRule::EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    $this->addError($attribute, RegisterRule::EMAIL);
+                if ($ruleName === Rules::EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                    $this->addError($attribute, Rules::EMAIL);
                 }
-                if ($ruleName === RegisterRule::MIN_LENGTH && strlen($value) < $rule['min']) {
-                    $this->addError($attribute, RegisterRule::MIN_LENGTH, $rule);
+                if ($ruleName === Rules::MIN_LENGTH && strlen($value) < $rule['min']) {
+                    $this->addError($attribute, Rules::MIN_LENGTH, $rule);
                 }
-                if ($ruleName === RegisterRule::MAX_LENGTH && strlen($value) > $rule['max']) {
-                    $this->addError($attribute, RegisterRule::MAX_LENGTH, $rule);
+                if ($ruleName === Rules::MAX_LENGTH && strlen($value) > $rule['max']) {
+                    $this->addError($attribute, Rules::MAX_LENGTH, $rule);
                 }
-                if ($ruleName === RegisterRule::MATCH_FIELD && $value != $this->{$rule['match']}) {
-                    $this->addError($attribute, RegisterRule::MATCH_FIELD, $rule);
+                if ($ruleName === Rules::MATCH_FIELD && $value != $this->{$rule['match']}) {
+                    $this->addError($attribute, Rules::MATCH_FIELD, $rule);
                 }
-                if ($ruleName === RegisterRule::UNIQUE_EMAIL) {
+                if ($ruleName === Rules::UNIQUE_EMAIL) {
                     $className = $rule['class'];
                     $tableName = $className::DBName();
                     $statement = Application::$app->getDataBase()->getPdo()->prepare("SELECT * FROM $tableName WHERE $attribute = :value");
@@ -59,7 +60,7 @@ class UserModel extends DBModel
                     $statement->execute();
                     $records = $statement->fetch(PDO::FETCH_ASSOC);
                     if (!empty($records)) {
-                        $this->addError($attribute, RegisterRule::UNIQUE_EMAIL, ['attribute' => $this->labels()[$attribute]]);
+                        $this->addError($attribute, Rules::UNIQUE_EMAIL, ['attribute' => $this->labels()[$attribute]]);
                     }
                 }
             }
