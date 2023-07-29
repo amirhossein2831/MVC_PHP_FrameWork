@@ -17,9 +17,7 @@ class AuthController extends BaseController implements Authentication
         if ($request->isPost()) {
             $loginModel->loadDate($request->getBody());
             if ($loginModel->validate() && $loginModel->login()) {
-
-//                Application::$app->getResponse()->redirect('/login');
-                echo "success";
+                Application::$app->getResponse()->redirect('/home');
                 return;
             }
 
