@@ -118,4 +118,12 @@ class Application
     {
         return is_null($this->user);
     }
+
+    /**
+     * @return UserModel|null
+     */
+    public function getUser(): ?UserModel
+    {
+        return $this->user;
+    }
 }
