@@ -5,12 +5,18 @@ namespace App\Controller;
 use App\Component\Interface\Authentication;
 use App\core\Application;
 use App\core\BaseController;
+use App\core\Middlewares\AuthMiddleware;
 use App\core\Request;
 use App\Models\LoginModel;
 use App\Models\UserModel;
 
 class AuthController extends BaseController implements Authentication
 {
+    public function __construct()
+    {
+        $this->registerMiddleware(new AuthMiddleware(['profile']));
+    }
+
     public function login(Request $request): void
     {
         $loginModel = new LoginModel();
@@ -61,7 +67,7 @@ class AuthController extends BaseController implements Authentication
         if ($request->isPost()) {
             //TODO : handle it
         }
-        $this->renderView('profile','newLayout');
+        $this->renderView('profile', 'newLayout');
 
     }
 }
