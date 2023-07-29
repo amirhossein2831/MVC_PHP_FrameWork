@@ -1,7 +1,7 @@
-    <?php echo $exception->getCode();?>
+<?php /** @var Exception $exception */?>
     <div class="not-found">
-        <h1 class="display-1">404</h1>
-        <p class="lead">Page not found</p>
-        <p class="mb-5">The requested page could not be found on the server.</p>
+        <h1 class="display-1"><?php echo $exception->getCode(); ?></h1>
+        <p class="lead"><?php echo $exception->header()?></p>
+        <p class="mb-5"><?php echo $exception->getMessage(); ?></p>
         <a href="/" class="btn btn-primary">Go Back to Home</a>
     </div>
