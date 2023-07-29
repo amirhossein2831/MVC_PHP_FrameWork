@@ -64,6 +64,8 @@ class Form
             , $link
             , $type);
     }
-
-
+    public static function profileField($name,$value): void
+    {
+        echo sprintf('<div class="profile-field">%s :<span> %s</span></div>',$name,$value);
+    }
 }
