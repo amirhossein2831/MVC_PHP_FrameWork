@@ -15,9 +15,12 @@
     <h2 class="logo">PHP MVC Framework</h2>
     <nav class="navigation">
         <a class="a" href="/">Home</a>
+        <?php if (!Application::$app->isGuest()): ?>
+            <a class="a" href="/profile">Profile</a>
+        <?php endif; ?>
+        <a class="a" href="/contact">Contact</a>
         <a class="a" href="">About</a>
         <a class="a" href="">Service</a>
-        <a class="a" href="/contact">Contact</a>
         <?php if (Application::$app->isGuest()): ?>
             <a href="/login">
                 <button  class="brn_login">Login</button>
