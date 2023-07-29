@@ -7,7 +7,6 @@ use App\Models\UserModel;
 
 class RegisterRule extends Rules
 {
-
     public static function rules(): array
     {
         return [
@@ -18,5 +17,4 @@ class RegisterRule extends Rules
             'confirmPassword' => [self::REQUIRED_FIELD, [self::MATCH_FIELD, 'match' => 'password']]
         ];
     }
-    
 }
