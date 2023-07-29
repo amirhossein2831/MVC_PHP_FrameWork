@@ -1,3 +1,4 @@
+<?php use App\core\Application; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,9 +18,15 @@
         <a class="a" href="">About</a>
         <a class="a" href="">Service</a>
         <a class="a" href="/contact">Contact</a>
-        <a href="/login">
-        <button  class="brn_login">Login</button>
-        </a>
+        <?php if (Application::$app->isGuest()): ?>
+            <a href="/login">
+                <button  class="brn_login">Login</button>
+            </a>
+        <?php else: ?>
+            <a href="/logout">
+                <button  class="brn_login">Log Out</button>
+            </a>
+        <?php endif; ?>
     </nav>
 </header>
 
