@@ -13,8 +13,10 @@ class UserModel extends DBModel
 {
     public string $firstName;
     public string $lastName;
+
     public string $password;
     public string $confirmPassword;
+
     public string $email;
     public mixed $status;
 

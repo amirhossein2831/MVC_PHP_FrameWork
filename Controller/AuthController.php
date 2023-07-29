@@ -6,19 +6,26 @@ use App\Component\Interface\Authentication;
 use App\core\Application;
 use App\core\BaseController;
 use App\core\Request;
+use App\Models\LoginModel;
 use App\Models\UserModel;
 
 class AuthController extends BaseController implements Authentication
 {
-    public function login(Request $request)
+    public function login(Request $request): void
     {
-        $userModel = new UserModel();           //TODO change with Login model
-
+        $loginModel = new LoginModel();
         if ($request->isPost()) {
-            echo "should work with post";
+            $loginModel->loadDate($request->getBody());
+            if ($loginModel->validate() && $loginModel->login()) {
+
+//                Application::$app->getResponse()->redirect('/login');
+                echo "success";
+                return;
+            }
+
         }
         $this->renderView('login', 'newLayout', [
-            'model' => $userModel
+            'model' => $loginModel
         ]);
     }
 
