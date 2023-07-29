@@ -11,11 +11,8 @@
             <?php echo $form->field($model, 'password',Field::PASSWORD_FIELD,'lock-closed'); ?>
             <?php echo $form->field($model, 'confirmPassword',Field::PASSWORD_FIELD,'lock-closed'); ?>
             <?php echo $form->field($model, 'email',Field::TEXT_FIELD,'mail' ); ?>
-
-            <button type="submit" class="btn">Register</button>
-            <div class="login-register">
-                <p>Already have an account?<a href="/login" class="register-link">Login</a></p>
-            </div>
+            <?php $form->submitButton("Register");?>
+            <?php $form->loginRegisterRedirect('/login','Login',"Already have an account?");?>
 
         <?php Form::end(); ?>
     </div>

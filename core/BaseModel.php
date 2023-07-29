@@ -2,13 +2,11 @@
 
 namespace App\core;
 
-use App\Rule\RegisterRule;
-
 abstract class BaseModel
 {
     public array $error = [];
 
-    protected abstract function rules(): array ;
+    protected abstract function rules(): array;
 
     protected abstract function validate(): bool;
 
@@ -21,13 +19,19 @@ abstract class BaseModel
         }
     }
 
-    protected function addError(string $attribute,string $rule,$param = []): void
+    protected function addErrorForRule(string $attribute, string $rule, $param = []): void
     {
-        $message = RegisterRule::errorMassage()[$rule] ?? '';
+        $message = Rules::errorMassage()[$rule] ?? '';
         foreach ($param as $key => $value) {
             $message = str_replace("{{$key}}", $value, $message);
         }
         $this->error[$attribute][] = $message;
+    }
+
+    protected function addError(string $attribute, string $message): void
+    {
+        $this->error[$attribute][] = $message;
+
     }
 
     public function hasError($attribute = null): mixed

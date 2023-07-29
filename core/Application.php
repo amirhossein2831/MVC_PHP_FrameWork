@@ -4,6 +4,7 @@ namespace App\core;
 
 use App\Controller\AuthController;
 use App\Controller\SiteController;
+use App\Models\UserModel;
 
 class Application
 {
@@ -15,8 +16,10 @@ class Application
     private Session $session;
 
     public static Application $app;
+    private ?UserModel $user;
 
-    public function __construct(array $config){
+    public function __construct(array $config)
+    {
         self::$ROOT = dirname(__DIR__);
         $this->request = new Request();
         $this->response = new Response();
@@ -24,6 +27,7 @@ class Application
         $this->dataBase = new DataBase($config['db']);
         $this->session = new Session();
         self::$app = $this;
+        $this->setUser();
     }
 
     public function run(): void
@@ -35,16 +39,19 @@ class Application
     {
         $siteController = new SiteController();
         $authController = new AuthController();
-        $this->getRouter()->get('/',[$siteController,'home']);
-        $this->getRouter()->get('/home',[$siteController,'home']);
-        $this->getRouter()->get('/contact',[$siteController,'contact']);
-        $this->getRouter()->post('/contact',[$siteController,'handleContact']);
+        $this->getRouter()->get('/', [$siteController, 'home']);
+        $this->getRouter()->get('/home', [$siteController, 'home']);
+        $this->getRouter()->get('/contact', [$siteController, 'contact']);
+        $this->getRouter()->post('/contact', [$siteController, 'handleContact']);
 
-        $this->getRouter()->get('/login',[$authController,'login']);
-        $this->getRouter()->post('/login',[$authController,'login']);
-        $this->getRouter()->get('/register',[$authController,'register']);
-        $this->getRouter()->post('/register',[$authController,'register']);
+        $this->getRouter()->get('/login', [$authController, 'login']);
+        $this->getRouter()->post('/login', [$authController, 'login']);
+        $this->getRouter()->get('/register', [$authController, 'register']);
+        $this->getRouter()->post('/register', [$authController, 'register']);
+        $this->getRouter()->get('/logout', [$authController, 'logout']);
+        $this->getRouter()->post('/logout', [$authController, 'logout']);
     }
+
     public final function getRouter(): Router
     {
         return $this->router;
@@ -82,4 +89,31 @@ class Application
         return $this->session;
     }
 
+    public function login(UserModel $user): bool
+    {
+        $this->session->set('user', $user->id);
+        return true;
+    }
+
+    public function logout(): void
+    {
+        $this->user = null;
+        $this->session->remove('user');
+    }
+
+    private function setUser(): void
+    {
+        $userId = $this->session->get('user');
+        if ($userId) {
+            $this->user = new UserModel();
+            $date = $this->user->findUserById(['id' => $userId]);
+            $this->user->loadDate($date);
+        } else
+            $this->user = null;
+    }
+
+    public function isGuest(): bool
+    {
+        return is_null($this->user);
+    }
 }
