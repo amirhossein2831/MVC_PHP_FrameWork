@@ -55,4 +55,13 @@ class AuthController extends BaseController implements Authentication
         }
         $this->renderView('logout', 'newLayout');
     }
+
+    public function profile(Request $request): void
+    {
+        if ($request->isPost()) {
+            //TODO : handle it
+        }
+        $this->renderView('profile','newLayout');
+
+    }
 }
