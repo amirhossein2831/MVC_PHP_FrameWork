@@ -7,6 +7,7 @@ abstract class BaseModel
     public array $error = [];
 
     protected abstract function rules(): array;
+    protected abstract function labels(): array;
 
     protected abstract function validate(): bool;
 
