@@ -14,17 +14,31 @@ class Router implements RouterMethod
         $this->routes = [];
     }
 
+    /**
+     * initial the getMethod path
+     * @param $path
+     * @param $callback
+     * @return void
+     */
     public function get($path, $callback): void
     {
         $this->routes ['GET'][$path] = $callback;
     }
 
+    /**
+     * initial the postMethod path
+     * @param $path
+     * @param $callback
+     * @return void
+     */
     public function post($path, $callback): void
     {
         $this->routes ['POST'][$path] = $callback;
     }
 
     /**
+     * get the path and method and call the method from it's controller
+     * @return void
      * @throws PageNotFoundException
      */
     public function resolve(): void

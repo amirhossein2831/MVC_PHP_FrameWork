@@ -15,7 +15,10 @@ class AuthMiddleware extends BaseMiddleware
         $this->action = $action;
     }
 
-    /** @throws ForbiddenException */
+    /**
+     * check if the user is guest has no access to Profile
+     * @throws ForbiddenException
+     */
     public function execute(): void
     {
         if (Application::$app->isGuest()) {
