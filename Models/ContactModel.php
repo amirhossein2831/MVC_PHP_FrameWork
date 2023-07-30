@@ -8,13 +8,16 @@ use App\Rule\ContactRule;
 
 class ContactModel extends BaseModel
 {
-    private int $id;
-    private string $subject;
-    private string $descripion;
-    private string $email;
-    public function __construct(){
+    public int $id;
+    public string $subject;
+    public string $description;
+
+    public string $email;
+
+    public function __construct()
+    {
         $this->subject = '';
-        $this->descripion = '';
+        $this->description = '';
         $this->email = '';
     }
 
@@ -27,6 +30,7 @@ class ContactModel extends BaseModel
     {
         foreach ($this->rules() as $attribute => $rules) {
             $value = $this->{$attribute};
+
             foreach ($rules as $rule) {
                 $ruleName = is_string($rule) ? $rule : $rule[0];
                 if ($ruleName === Rules::REQUIRED_FIELD && !$value) {
@@ -40,12 +44,17 @@ class ContactModel extends BaseModel
         return !$this->hasError();
     }
 
-    protected function labels(): array
+    public function labels(): array
     {
         return [
             'subject' => 'Enter Subject',
             'email' => 'Email',
             'description' => 'Enter Description'
         ];
+    }
+
+    public function send(): bool
+    {
+        return true;
     }
 }
