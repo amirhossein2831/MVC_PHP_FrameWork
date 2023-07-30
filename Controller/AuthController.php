@@ -71,4 +71,10 @@ class AuthController extends BaseController implements Authentication
         $this->view->renderView('profile', 'newLayout');
 
     }
+
+    public function forgetPass(): void
+    {
+        $this->view->renderView('forgetPass', 'newLayout');
+
+    }
 }

@@ -81,6 +81,9 @@ class Application implements App
         $this->getRouter()->post('/logout', [$authController, 'logout']);
         $this->getRouter()->get('/profile', [$authController, 'profile']);
         $this->getRouter()->post('/profile', [$authController, 'profile']);
+        $this->getRouter()->get('/forgetPassword', [$authController, 'forgetPass']);
+        $this->getRouter()->post('/forgetPassword', [$authController, 'forgetPass']);
+
     }
 
 

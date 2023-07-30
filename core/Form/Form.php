@@ -44,7 +44,7 @@ class Form
         echo '
              <div class="remember-forget">
                 <label ><input type="checkbox">Remember me</label>
-                <a href="">ForgetPassword</a>
+                <a href="/forgetPassword">ForgetPassword</a>
              </div>
         ';
     }
