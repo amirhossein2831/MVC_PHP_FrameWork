@@ -12,8 +12,9 @@ use App\Models\UserModel;
 
 class AuthController extends BaseController implements Authentication
 {
-    public function __construct()
+    public function __construct($view)
     {
+        parent::__construct($view);
         $this->registerMiddleware(new AuthMiddleware(['profile']));
     }
 
@@ -28,7 +29,7 @@ class AuthController extends BaseController implements Authentication
             }
 
         }
-        $this->renderView('login', 'newLayout', [
+        $this->view->renderView('login', 'newLayout', [
             'model' => $loginModel
         ]);
     }
@@ -44,7 +45,7 @@ class AuthController extends BaseController implements Authentication
                 return;
             }
         }
-        $this->renderView('register', 'newLayout', [
+        $this->view->renderView('register', 'newLayout', [
             'model' => $userModel
         ]);
     }
@@ -59,7 +60,7 @@ class AuthController extends BaseController implements Authentication
             Application::$app->getResponse()->redirect('/home');
             return;
         }
-        $this->renderView('logout', 'newLayout');
+        $this->view->renderView('logout', 'newLayout');
     }
 
     public function profile(Request $request): void
@@ -67,7 +68,7 @@ class AuthController extends BaseController implements Authentication
         if ($request->isPost()) {
             //TODO : handle it
         }
-        $this->renderView('profile', 'newLayout');
+        $this->view->renderView('profile', 'newLayout');
 
     }
 }
