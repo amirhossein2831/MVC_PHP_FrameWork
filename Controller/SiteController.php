@@ -3,6 +3,7 @@ namespace App\Controller;
 use App\core\Application;
 use App\core\BaseController;
 use App\core\Request;
+use App\Models\ContactModel;
 
 class SiteController extends BaseController
 {
@@ -14,8 +15,15 @@ class SiteController extends BaseController
         $this->view->renderView( 'home',  'newLayout');
     }
 
-    public function contact(): void
+    public function contact(Request $request): void
     {
+        $contactModel = new ContactModel();
+        if ($request->isPost()) {
+            $contactModel->loadDate($request->getBody());
+            if ($contactModel->validate() && $contactModel->save()) {
+
+            }
+        }
         $this->view->renderView('contact','newLayout',[
             'model' => Application::$app->getUser(),
         ]);
