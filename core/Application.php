@@ -61,7 +61,7 @@ class Application
         $this->getRouter()->get('/', [$siteController, 'home']);
         $this->getRouter()->get('/home', [$siteController, 'home']);
         $this->getRouter()->get('/contact', [$siteController, 'contact']);
-        $this->getRouter()->post('/contact', [$siteController, 'handleContact']);
+        $this->getRouter()->post('/contact', [$siteController, 'contact']);
 
         $this->getRouter()->get('/login', [$authController, 'login']);
         $this->getRouter()->post('/login', [$authController, 'login']);

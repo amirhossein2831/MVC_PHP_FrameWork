@@ -23,16 +23,16 @@ class Form
         echo '</form>';
     }
 
-    public static function successRegister(): void
+    public static function successAlert($helpMessage): void
     {
         $session = Application::$app->getSession();
         $message = $session->getFlash('success');
 
-        if ($session->getFlash('success')) {
+        if ($message) {
             echo '
                     <div class="alert alert-success" id="successAlert">
                         <span style="text-align: center;color: darkcyan;font-style: italic">' . $message . ' 
-                        <br> <p style="font-size: 15px;color: black">now you can login</p></span>
+                        <br> <p style="font-size: 13px;color: black">'.$helpMessage.'</p></span>
                         <button type="button" class="close-button" onclick="closeAlert()">x</button>
                     </div>
                   ';
