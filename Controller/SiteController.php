@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller;
+use App\Component\Util\Util;
 use App\core\Application;
 use App\core\BaseController;
 use App\core\Request;
@@ -20,18 +21,15 @@ class SiteController extends BaseController
         $contactModel = new ContactModel();
         if ($request->isPost()) {
             $contactModel->loadDate($request->getBody());
-            if ($contactModel->validate() && $contactModel->save()) {
-
+            if ($contactModel->validate() && $contactModel->send()) {
+                Application::$app->getSession()->setFlash('success','Thanks for Your FeedBack');
+                Application::$app->getResponse()->redirect('/contact');
+                return;
             }
         }
         $this->view->renderView('contact','newLayout',[
-            'model' => Application::$app->getUser(),
+            'model' => $contactModel,
         ]);
-    }
-
-    public function handleContact(Request $request): void
-    {
-        var_dump($request->getBody());
     }
 
 }
