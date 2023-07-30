@@ -68,6 +68,10 @@ class Application implements App
         $this->getRouter()->get('/home', [$siteController, 'home']);
         $this->getRouter()->get('/contact', [$siteController, 'contact']);
         $this->getRouter()->post('/contact', [$siteController, 'contact']);
+        $this->getRouter()->get('/about', [$siteController, 'about']);
+        $this->getRouter()->post('/about', [$siteController, 'about']);
+        $this->getRouter()->get('/service', [$siteController, 'service']);
+        $this->getRouter()->post('/service', [$siteController, 'service']);
 
         $this->getRouter()->get('/login', [$authController, 'login']);
         $this->getRouter()->post('/login', [$authController, 'login']);

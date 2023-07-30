@@ -36,4 +36,14 @@ class SiteController extends BaseController
         ]);
     }
 
+    public function about(): void
+    {
+        $this->view->renderView('about', 'newLayout');
+
+    }
+    public function service(): void
+    {
+        $this->view->renderView('service', 'newLayout');
+
+    }
 }
