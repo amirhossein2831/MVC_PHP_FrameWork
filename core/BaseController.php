@@ -14,7 +14,8 @@ abstract class BaseController
 
     protected View $view;
 
-    public function __construct($view){
+    public function __construct($view)
+    {
         $this->view = $view;
     }
 
