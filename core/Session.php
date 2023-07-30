@@ -35,6 +35,11 @@ class Session implements SessionStorage
         $_SESSION[self::FLASH_KEY] = $flashMessages;
     }
 
+    /**
+     * @param $key
+     * @param string $message
+     * @return void
+     */
     public function setFlash($key, string $message): void
     {
         $_SESSION[self::FLASH_KEY][$key] = [
@@ -43,22 +48,39 @@ class Session implements SessionStorage
         ];
     }
 
+    /**
+     * @param $key
+     * @return mixed
+     */
     public function getFlash($key): mixed
     {
         return $_SESSION[self::FLASH_KEY][$key]['value'] ?? false;
     }
 
-    public function get($key)
+    /**
+     * @param $key
+     * @return false|mixed
+     */
+    public function get($key): mixed
     {
         return $_SESSION[$key] ?? false;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     * @return void
+     */
     public function set($key, $value): void
     {
         $_SESSION[$key] = $value;
     }
 
-    public function remove($key)
+    /**
+     * @param $key
+     * @return void
+     */
+    public function remove($key): void
     {
         unset($_SESSION[$key]);
     }
