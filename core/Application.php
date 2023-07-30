@@ -2,13 +2,14 @@
 
 namespace App\core;
 
+use App\Component\Interface\App;
 use App\Controller\AuthController;
 use App\Controller\SiteController;
 use App\core\db\DataBase;
 use App\core\Exception\ForbiddenException;
 use App\Models\UserModel;
 
-class Application
+class Application implements App
 {
     public static string $ROOT;
     private Request $request;
@@ -54,6 +55,10 @@ class Application
 
     }
 
+    /**
+     * generate the path of the Application
+     * @return void
+     */
     public function initialRouter(): void
     {
         $siteController = new SiteController($this->view);
@@ -74,6 +79,71 @@ class Application
         $this->getRouter()->post('/profile', [$authController, 'profile']);
     }
 
+
+    /**
+     * set user id in session
+     * @param UserModel $user
+     * @return bool
+     */
+    public function login(UserModel $user): bool
+    {
+        $this->session->set('user', $user->id);
+        return true;
+    }
+
+    /**
+     * logout and remove userid from Sessoin
+     * @return void
+     */
+    public function logout(): void
+    {
+        $this->user = null;
+        $this->session->remove('user');
+    }
+
+    /**
+     * when user login save the user
+     * @return void
+     */
+    private function setUser(): void
+    {
+        $userId = $this->session->get('user');
+        if ($userId) {
+            $this->user = new UserModel();
+            $date = $this->user->findUserById(['id' => $userId]);
+            $this->user->loadDate($date);
+        } else
+            $this->user = null;
+    }
+
+    /**
+     * check that the user has loginAuth or not
+     * @return bool
+     */
+    public function isGuest(): bool
+    {
+        return is_null($this->user);
+    }
+
+    /**
+     * @return UserModel|null
+     */
+    public function getUser(): ?UserModel
+    {
+        return $this->user;
+    }
+
+    /**
+     * @return BaseController
+     */
+    public function getController(): BaseController
+    {
+        return $this->controller;
+    }
+
+    /**
+     * @return Router
+     */
     public final function getRouter(): Router
     {
         return $this->router;
@@ -111,47 +181,4 @@ class Application
         return $this->session;
     }
 
-    public function login(UserModel $user): bool
-    {
-        $this->session->set('user', $user->id);
-        return true;
-    }
-
-    public function logout(): void
-    {
-        $this->user = null;
-        $this->session->remove('user');
-    }
-
-    private function setUser(): void
-    {
-        $userId = $this->session->get('user');
-        if ($userId) {
-            $this->user = new UserModel();
-            $date = $this->user->findUserById(['id' => $userId]);
-            $this->user->loadDate($date);
-        } else
-            $this->user = null;
-    }
-
-    public function isGuest(): bool
-    {
-        return is_null($this->user);
-    }
-
-    /**
-     * @return UserModel|null
-     */
-    public function getUser(): ?UserModel
-    {
-        return $this->user;
-    }
-
-    /**
-     * @return BaseController
-     */
-    public function getController(): BaseController
-    {
-        return $this->controller;
-    }
 }
