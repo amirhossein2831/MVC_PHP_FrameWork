@@ -3,7 +3,6 @@
 namespace App\Rule;
 
 use App\core\Rules;
-use App\Models\ContactModel;
 
 class ContactRule extends Rules
 {
