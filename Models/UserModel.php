@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\core\Application;
-use App\core\DBModel;
+use App\core\db\DBModel;
 use App\core\Response;
 use App\core\Rules;
 use App\Rule\RegisterRule;

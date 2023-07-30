@@ -1,8 +1,9 @@
 <?php
 
-namespace App\core;
+namespace App\core\db;
 
-use App\Models\UserModel;
+use App\core\Application;
+use App\core\BaseModel;
 use PDO;
 
 abstract class DBModel extends BaseModel

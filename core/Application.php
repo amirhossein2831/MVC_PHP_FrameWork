@@ -4,6 +4,7 @@ namespace App\core;
 
 use App\Controller\AuthController;
 use App\Controller\SiteController;
+use App\core\db\DataBase;
 use App\core\Exception\ForbiddenException;
 use App\Models\UserModel;
 
