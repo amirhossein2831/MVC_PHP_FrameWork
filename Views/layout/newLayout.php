@@ -9,9 +9,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="<?php echo './Css/style.css' ?>">
+    <link rel="stylesheet" href="<?php echo './Css/normalize.css' ?>">
+    <link rel="stylesheet" href="<?php echo './Css/main.css' ?>">
     <link rel="icon" type="image/x-icon" href="./resource//image/titleImage.png">
     <title><?php echo $this->getTitle( )?></title>
-</head>
+</head>style
 <body>
 <header>
     <h2 class="logo">PHP MVC Framework</h2>

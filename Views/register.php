@@ -1,7 +1,7 @@
 <?php /** @var $model App\Models\UserModel */ ?>
 <?php use App\core\Form\InputField,App\core\Form\Form;?>
 
-<div id="container" class="wrapper" style="height: auto">
+<div id="container" class="wrapper" style="height: auto;width: 500px">
     <div class="form-box register">
         <h2>Registration</h2>
         <?php $form = Form::begin('', 'post'); ?>
