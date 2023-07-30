@@ -19,12 +19,14 @@ class Application
     public static Application $app;
     private ?UserModel $user;
     private BaseController $controller;
+    private View $view;
 
 
     public function __construct(array $config)
     {
         self::$ROOT = dirname(__DIR__);
         $this->request = new Request();
+        $this->view = new View();
         $this->response = new Response();
         $this->router = new Router();
         $this->dataBase = new DataBase($config['db']);
@@ -39,13 +41,13 @@ class Application
             $this->router->resolve();
         } catch (Exception\PageNotFoundException $exception) {
             $this->response->setStatusCode(404);
-            $this->controller->renderView('error','errorLayout',[
-                'exception'=>$exception
+            $this->view->renderView('error', 'errorLayout', [
+                'exception' => $exception
             ]);
-        }catch (ForbiddenException $exception){
-            $this->response->setStatusCode(403);    
-            $this->controller->renderView('error','errorLayout',[
-                'exception'=>$exception
+        } catch (ForbiddenException $exception) {
+            $this->response->setStatusCode(403);
+            $this->view->renderView('error', 'errorLayout', [
+                'exception' => $exception
             ]);
         }
 
@@ -53,8 +55,8 @@ class Application
 
     public function initialRouter(): void
     {
-        $siteController = new SiteController();
-        $authController = new AuthController();
+        $siteController = new SiteController($this->view);
+        $authController = new AuthController($this->view);
         $this->controller = $authController;
         $this->getRouter()->get('/', [$siteController, 'home']);
         $this->getRouter()->get('/home', [$siteController, 'home']);
@@ -142,5 +144,13 @@ class Application
     public function getUser(): ?UserModel
     {
         return $this->user;
+    }
+
+    /**
+     * @return BaseController
+     */
+    public function getController(): BaseController
+    {
+        return $this->controller;
     }
 }
