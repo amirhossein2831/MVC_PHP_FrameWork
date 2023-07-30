@@ -4,12 +4,20 @@ namespace App\core;
 
 class Request
 {
+    /**
+     * get teh path from url
+     * @return string
+     */
     public function getPath(): string
     {
         $path = $_SERVER["REQUEST_URI"];
         return substr($path, 0, strpos($path, "?") ?: strlen($path));
     }
 
+    /**
+     * set the body of request
+     * @return array
+     */
     public function getBody(): array
     {
         $body = [];
@@ -26,19 +34,21 @@ class Request
         return $body;
     }
 
+    /**
+     * get the method of request
+     * @return string
+     */
     public function method(): string
     {
         return $_SERVER["REQUEST_METHOD"];
     }
 
+    /**
+     * @return bool
+     */
     public function isPost(): bool
     {
         return $this->method() === 'POST';
-    }
-
-    public function isGet(): bool
-    {
-        return $this->method() === 'GET';
     }
 
 }
