@@ -3,9 +3,8 @@
 namespace App\core\Form;
 
 use App\core\BaseModel;
-use App\Models\UserModel;
 
-class Field
+class InputField extends BaseField
 {
     public const TEXT_FIELD = 'text';
     public const PASSWORD_FIELD = 'password';
@@ -20,40 +19,24 @@ class Field
     public const RANGE_FIELD = 'range';
     public const COLOR_FIELD = 'color';
 
-    private BaseModel $model;
-    private string $attribute;
-
     private string $type;
-
     private string $iconType;
 
     public function __construct(BaseModel $model, string $attribute, $type, $iconType)
     {
-        $this->model = $model;
-        $this->attribute = $attribute;
+        parent::__construct($model, $attribute);
         $this->type = $type;
         $this->iconType = $iconType;
     }
 
-    public function __toString(): string
+    public function inputField(): string
     {
-        $hasError = $this->model->hasError($this->attribute);
-        $string = $hasError ? sprintf('<div class="error-text">%s</div>', $this->model->getError($this->attribute)) : '';
-        return sprintf('
-             <div class="input-box%s">
-                 <span class="icon">
-                        <ion-icon name="%s"></ion-icon>
-                 </span>
-                <input class="field-input" name="%s" value="%s" type="%s">
-                <label>%s</label>
-             </div>%s
-           ', $hasError ? ' error-box' : ''
+        return sprintf(
+            ' <span class="icon"><ion-icon name="%s"></ion-icon></span>
+                     <input class="field-input" name="%s" value="%s" type="%s">'
             , $this->iconType
-            , $this->attribute
+            ,$this->attribute
             , $this->model->{$this->attribute}
-            , $this->type
-            , $this->model->labels()[$this->attribute] ?? $this->attribute
-            , $string
-        );
+            , $this->type);
     }
 }

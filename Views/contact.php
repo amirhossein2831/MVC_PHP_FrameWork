@@ -1,5 +1,5 @@
 <?php /** @var $model App\Models\UserModel */ ?>
-<?php use App\core\Form\Field;
+<?php use App\core\Form\InputField;
 use App\core\Form\Form; ?>
 
 <div id="container" class="wrapper" style="height: auto;width: 500px">
@@ -8,9 +8,9 @@ use App\core\Form\Form; ?>
         <?php Form::successAlert('your feedback help us to improve faster'); ?>
         <?php $form = Form::begin('', 'post'); ?>
 
-        <?php echo $form->field($model, 'subject', Field::TEXT_FIELD, 'person'); ?>
-        <?php echo $form->field($model, 'description', Field::TEXT_FIELD, 'text'); ?>
-        <?php echo $form->field($model, 'email', Field::TEXT_FIELD, 'mail'); ?>
+        <?php echo $form->field($model, 'subject', InputField::TEXT_FIELD, 'person'); ?>
+        <?php echo $form->field($model, 'description', InputField::TEXT_FIELD, 'text'); ?>
+        <?php echo $form->field($model, 'email', InputField::TEXT_FIELD, 'mail'); ?>
 
         <?php $form->submitButton("Add Contact"); ?>
         <?php Form::end(); ?>

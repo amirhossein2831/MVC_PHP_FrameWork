@@ -13,9 +13,9 @@ class Form
         return new Form();
     }
 
-    public function field(BaseModel $model, $attribute, $type, $iconType): Field
+    public function field(BaseModel $model, $attribute, $type, $iconType): InputField
     {
-        return new Field($model, $attribute, $type, $iconType);
+        return new InputField($model, $attribute, $type, $iconType);
     }
 
     public static function end(): void
