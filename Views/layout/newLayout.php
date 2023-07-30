@@ -1,4 +1,5 @@
-<?php use App\core\Application; ?>
+<?php /** @var View $this */ ?>
+<?php use App\core\Application,App\core\View;?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,7 +9,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="<?php echo './Css/style.css' ?>">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="./resource//image/titleImage.png">
+    <title><?php echo $this->getTitle( )?></title>
 </head>
 <body>
 <header>
