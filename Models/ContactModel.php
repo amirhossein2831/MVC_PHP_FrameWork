@@ -23,7 +23,7 @@ class ContactModel extends BaseModel
         return ContactRule::rules();
     }
 
-    protected function validate(): bool
+    public function validate(): bool
     {
         foreach ($this->rules() as $attribute => $rules) {
             $value = $this->{$attribute};

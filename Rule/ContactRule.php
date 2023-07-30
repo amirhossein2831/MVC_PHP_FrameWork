@@ -13,7 +13,7 @@ class ContactRule extends Rules
         return [
             'subject' => [self::REQUIRED_FIELD],
             'description' => [self::REQUIRED_FIELD],
-            'email' => [self::REQUIRED_FIELD, self::EMAIL, [self::UNIQUE_EMAIL, 'class' => ContactModel::class]],
+            'email' => [self::REQUIRED_FIELD, self::EMAIL],
         ];
     }
 }
