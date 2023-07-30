@@ -239,13 +239,14 @@ body {
 }
 
 .error-box {
-    border-bottom: 2px solid #BC0303;
+    border-bottom: 2px solid #F51212;
 }
 
 .error-text {
-    color: #BC0303;
-    font-size: .8em;
-
+    color: #F51212;
+    font-family: "Century Schoolbook L" ,sans-serif;
+    font-size: .9em;
+    font-weight: bold;
     margin-top: -25px
 }
 .alert {

@@ -27,7 +27,7 @@ class SiteController extends BaseController
             $contactModel->loadDate($request->getBody());
             if ($contactModel->validate() && $contactModel->send()) {
                 Application::$app->getSession()->setFlash('success', 'Thanks for Your FeedBack');
-                Application::$app->getResponse()->redirect('/contact');
+                Application::$app->getResponse()->redirect('/home');
                 return;
             }
         }

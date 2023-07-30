@@ -23,10 +23,10 @@ abstract class Rules
     public static function errorMassage(): array
     {
         return [
-            self::REQUIRED_FIELD => 'This field is required',
-            self::EMAIL => 'This field must be a valid Email Address',
-            self::MIN_LENGTH => 'The length of this field must be more than {min}',
-            self::MAX_LENGTH => 'The length of this field must be less than {max}',
+            self::REQUIRED_FIELD => 'This Field is required',
+            self::EMAIL => 'This Field must be a valid Email Address',
+            self::MIN_LENGTH => 'The length of this Field must be more than {min}',
+            self::MAX_LENGTH => 'The length of this Field must be less than {max}',
             self::MATCH_FIELD => 'This field must be match with {match}',
             self::UNIQUE_EMAIL => 'The {attribute} is already taken',
         ];
